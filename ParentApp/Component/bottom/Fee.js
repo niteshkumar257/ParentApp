@@ -1,87 +1,144 @@
-import { View, Text ,StyleSheet,Button} from 'react-native'
+import { View, Text ,StyleSheet,TouchableOpacity} from 'react-native'
 import React from 'react'
 
 const Fee = ({nthInstallMent,status,amount,date}) => {
   return (
-    <View >
-     <View style={styles.feeContainer}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.keyText}>InstallMent No :</Text>
-          <Text style={styles.valueText}>{nthInstallMent}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.keyText}>Status :</Text>
-          {
-            status==="Paid" ? <Text style={[styles.valueText,styles.PaidStatus]}>{status}</Text> :
-            <Text style={[styles.valueText,styles.UnpaidStatus]}>{status}</Text>}
+    <View  style={styles.mainContainer}>
+          <View style={[styles.LeftContainer,status==="Paid"?styles.paid:styles.unpaid]}>
+              <Text  style={styles.text}>
+               {nthInstallMent}
+              </Text>
           </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.keyText}>Amount :</Text>
-          <Text style={styles.valueText}>{amount}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.keyText}>Date :</Text>
-          <Text style={styles.valueText}>{date}</Text>
-        </View>
-        <View style={styles.paidButton}>
-       {status==="UnPaid" && <Button title='Pay Now' color="#1377c0"/>}
+          <View style={styles.RightContainer}>
+            <View style={styles.amountContainer}>
+              <Text style={{
+                  fontSize:30,
+                  fontWeight:600,
+                  color:"black"
+              }}>{amount}</Text>
+              <Text style={[status==="Paid"?styles.paidText:styles.unpaidText]} >{status==="Paid"?"Paid":"Un_Paid"}</Text>
+              
+            </View>
+           
+            <View style={styles.dateContainer}>
+              <Text style={[styles.keyText]}>Last Date</Text>
+              <Text style={[styles.valueText]}>23/2/23</Text>
+            
+            </View>
+            {
+              status==="Paid" && 
+              <View style={styles.dateContainer}>
+              <Text style={[styles.keyText]}>Paid Date</Text>
+              <Text style={[styles.valueText]}>23/2/23</Text>
+            
+            </View>
+             }
+           
+
           </View>
-      </View>
     </View>
   )
 }
 
-export default Fee
+export default Fee;
 const styles=StyleSheet.create(
-    {
-      container:{
-        height:"100%",
-        width:"100%",
-         display:"flex",
-        padding:10,
-         backgroundColor:"white"
-      },
-      text:{
-        fontSize:30,
-        color:"black"
-      },
-      feeContainer:{
-        display:"flex",
-        width:"98%",
-        flexDirection:"column",
-        rowGap:10,
-        padding:10,
-        borderWidth:0.35,
-        borderColor:"grey",
-        borderRadius:9
-  
-      },
-      infoContainer:{
-        width:"100%",
-        display:"flex",
-        flexDirection:"row",
-        columnGap:20
+  { 
+    mainContainer:{
+      height:120,
+      width:"100%",
+     flex:1,
+     flexDirection:"row",
+     justifyContent:"space-between",
+     alignItems:"center",
+     columnGap:5,
+     borderRadius:9,
+   
+     
+    },
+    LeftContainer:{
+      height:120,
+    
+      flex:1,
+       justifyContent:"center",
+       alignItems:"center",
+      borderRadius:9,
+     
+
+    },
+    paid:{
+     backgroundColor:"#42ba96",
+      // backgroundColor:"green"
+    
+    },
+    unpaid:{
+      backgroundColor:"#ff3333"
+    },
+    text:{
+      fontSize:30,
+      fontWeight:700,
+      color:"white"
       
-  
-  
-      },
-      keyText:{
-     fontSize:15,
-     fontWeight:500
-  
-      },
-      valueText:{
-        fontSize:18,
-        fontWeight:500,
-        color:"black"
-  
-      },
-      PaidStatus:{
-          color:"green"
-      },
-      UnpaidStatus:{
-        color:"red"
-  
-      }
+
+    },
+    RightContainer:{
+    minHeight:120,
+      height:"auto",
+     paddingTop:10,
+      flex:4,
+      display:"flex",
+      flexDirection:"column",
+      rowGap:5,
+  justifyContent:"space-evenly",
+  alignItems:"center",
+  backgroundColor:"white",
+  paddingBottom:10,
+ 
+    
+   
+      borderRadius:9
+    },
+    dateContainer:{
+      height:45,
+    
+   display:"flex",
+      flexDirection:"row",
+    
+      padding:5,
+      width:"95%",
+      justifyContent:"space-between",
+      alignItems:"center"
+
+    },
+    amountContainer:{
+
+      height:45,
+      padding:5,
+      display:"flex",
+      flexDirection:"row",
+      justifyContent:"space-between",
+     
+      width:"95%"
+
+    },
+    keyText:{
+      fontSize:15,
+      color:"black",
+      fontWeight:500
+    },
+    valueText:{
+      fontSize:15,
+      color:"black"
+    },
+    paidText:{
+    fontSize:20,
+    fontWeight:500,
+    color:"#42ba96"
+    },
+    unpaidText:{
+      fontSize:20,
+      fontWeight:500,
+      color:"#ff3333"
+
     }
-  )
+  }
+)

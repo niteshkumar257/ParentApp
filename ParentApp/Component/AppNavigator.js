@@ -47,7 +47,12 @@ const AppNavigator = () => {
           component={Notification}
           options={{ title: 'Notifications' }}
         />
-        
+          <Stack.Screen
+          name="notfound"
+          component={Notfound}
+          options={{title:'Notfound'}}
+          
+          />
          <Stack.Screen
           name="student"
           component={Student}

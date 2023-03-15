@@ -1,31 +1,30 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
 import Chart from './Chart'
-import Table from "./Table";
+import DataTable from "./DataTable"
+import LineChart from './LineChart';
+import Chart1 from "./ScrolableChart";
+import Graph from './Graph';
 
 const Screen3 = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.tableContainer}>
-          <Text style={styles.text}>Performance Table</Text>
-         
-          <View>
-            <Text style={styles.subjectTitle}>Physics</Text>
-          <Chart />
-          </View>
-          <View>
-            <Text style={styles.subjectTitle}>Chemistry</Text>
-          <Chart />
-          </View>
-          <View>
-            <Text style={styles.subjectTitle}>Mathematics</Text>
-          <Chart />
-          </View>
+        <Text style={styles.text}>Peformance Table</Text>
+      {/* <DataTable/> */}
         </View>
+  
+       
 
         <View style={styles.chartContainer}>
-       </View>
+        
+        <Chart type={"bezier"} color1={"#54f6d2"} color2={"#affae9"}/>
+        <Chart type={"bezier"} color1={"#d1e2f5"} color2={"#affae9"}/>
+         <Graph/>
+         <LineChart/>
+         <Chart1/>
+        </View>
 
       </View>
     </ScrollView>
@@ -40,7 +39,7 @@ const styles = StyleSheet.create(
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "white",
+      backgroundColor:"white"
 
     },
     tableContainer: {
@@ -48,7 +47,8 @@ const styles = StyleSheet.create(
       padding: 10,
       display: "flex",
       flexDirection: "column",
-      rowGap:20
+      rowGap:20,
+      backgroundColor:"white"
 
 
     },

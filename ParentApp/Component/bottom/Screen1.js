@@ -1,12 +1,13 @@
-import { View, Text ,StyleSheet,ScrollView,FlatList} from 'react-native'
+import { View, Text ,StyleSheet,ScrollView,FlatList,Image} from 'react-native'
 import React ,{useEffect,useState} from 'react'
 
 
-const Screen1 = () => {
 
+const Screen1 = () => {
+ const logo=require("../../assets/curriculum.png")
   return (
     <View style={styles.container}> 
-    <Text style={styles.text}>Curriculum</Text>
+     <Image style={styles.Image} source={logo}/>
   </View>
   )
 }
@@ -19,6 +20,7 @@ const styles=StyleSheet.create(
        justifyContent:"center",
        alignItems:"center",
        backgroundColor:"white",
+       padding:20,
        gap:30,
     },
     text:{
@@ -56,7 +58,15 @@ const styles=StyleSheet.create(
       margin:10,
       backgroundColor:"lightgrey"
 
+    },
+    Image:
+
+    {
+      height:300,
+      width:"98%",
+      padding:20
     }
+
   }
 )
 export default Screen1

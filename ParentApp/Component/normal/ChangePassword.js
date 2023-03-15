@@ -43,8 +43,10 @@ const Login=({navigation})=>
           setUserName("");
           setConfirmPassword("");
           showToast("success","SuccesFull","Password changed successfully")
+          setTimeout(() =>   navigation.navigate("login"),500);
+         
           setShow(false);
-          navigation.navigate("login");
+        
           
 
       }).catch((err) => {

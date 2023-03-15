@@ -67,11 +67,13 @@ const Login=({navigation})=>
      
     }
     catch (error) {
+      console.warn(error);
       setShow(false);
         navigation.navigate("notfound");
      
    }
   }else showToast("error","Warn","AllFields Required")
+  // navigation.navigate("home");
  
    
 }

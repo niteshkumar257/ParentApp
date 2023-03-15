@@ -1,24 +1,27 @@
 import { View, Text ,StyleSheet,SafeAreaView,ScrollView} from 'react-native'
 import React from 'react'
 import Mentor from './Mentor';
+
 const Screen4 = () => {
   return (
     <ScrollView>
          <View style={styles.container}>
-          <View style={styles.heading}>
-          <Text style={styles.text}>Available Mentors</Text>
-          </View>
          
-       <Mentor/>
-       <Mentor/>
-       <Mentor/>
-       <Mentor/>
-       <Mentor/>
-       <Mentor/>
-       <Mentor/>
-      
-      
-       
+       <Mentor name={"MB sharma"}  
+       qualification={"MSc in Physics"}
+        exp={"Academics"}
+        details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }
+        />
+          <Mentor name={"R sharma"}  
+       qualification={"MSc in Physics"}
+        exp={"Academics"}
+        details={"20 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ratan Taata foundation ,TCS"}
+        />
+         <Mentor name={"AK sharma"}  
+       qualification={"MSc in Physics"}
+        exp={"Academics"}
+        details={"20 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ratan Taata foundation ,TCS"}
+        />
     </View>
     </ScrollView>
      
@@ -32,10 +35,12 @@ const styles=StyleSheet.create(
       height:"100%",
       width:"100%",
        display:"flex",
-       backgroundColor:"white",
+     
        alignItems:"center",
        padding:10,
-       rowGap:20
+       rowGap:20,
+       backgroundColor:"#ebecec",
+    
     },
     heading:{
       display:"flex",
@@ -45,7 +50,11 @@ const styles=StyleSheet.create(
     },
     text:{
       fontSize:25,
-      color:"black"
+      color:"black",
+      lineHeight:40,
+      fontWeight:600
+   
+     
     }
   }
 )

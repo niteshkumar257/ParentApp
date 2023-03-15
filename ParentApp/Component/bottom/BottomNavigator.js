@@ -20,8 +20,8 @@ const BottomNavigator = () => {
         name="Curriculum"
         component={Screen1}
         options={{
-          headerShown: false,
-        
+         
+          headerShown:false,
           tabBarIcon: tabInfo => {
             return (
               <Curriculum

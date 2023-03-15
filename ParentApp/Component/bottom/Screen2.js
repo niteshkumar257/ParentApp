@@ -9,16 +9,12 @@ const Screen2 = () => {
   return(
   <ScrollView>
     <View style={styles.container}>
-      <View>
-        <Text style={{
-          fontSize:20,
-          color:"black"
-        }}>Fee Details</Text>
-      </View>
-      <Fee nthInstallMent={"First"} status={"Paid"} amount={12399} date={"23/2/12"}/>
-      <Fee nthInstallMent={"Second"} status={"UnPaid"} amount={34000} date={"23/2/12"}/>
-      <Fee nthInstallMent={"Third"} status={"UnPaid"} amount={35890} date={"23/2/12"}/>
-
+       <Text style={styles.header}>Fee Studetails</Text>
+      <Fee nthInstallMent={"1st"} status={"Paid"} amount={"12,399"} date={"23/2/12"}/>
+      <Fee nthInstallMent={"2nd"} status={"Un_Paid"} amount={"34,000"} date={"23/2/12"}/>
+      <Fee nthInstallMent={"3rd"} status={"Paid"} amount={"35,890"} date={"23/2/12"}/>
+     
+    
     </View>
   </ScrollView>
   )
@@ -30,10 +26,16 @@ const styles=StyleSheet.create(
       width:"100%",
        display:"flex",
        flexDirection:"column",
-       rowGap:20,
+       rowGap:10,
       padding:10,
-       backgroundColor:"white"
+      
     },
+    header:{
+      fontSize:25,
+      fontWeight:500,
+      color:"black",
+      marginBottom:30
+    }
   }
 )
 export default Screen2
