@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
+import { Chart, Line, Area, HorizontalAxis, VerticalAxis ,Tooltip} from 'react-native-responsive-linechart'
 
 
 
@@ -129,7 +129,7 @@ const ChartC = ({type,color1,color2}) => {
   <Area
   smoothing={type}
    theme={{ gradient: { from: { color:color1 }, to: { color: color2, opacity: 0.7 } }}} />
-    {/* <Line theme={{ stroke: { color: 'pink', width: 2 } }} /> */}
+    <Line   smoothing={type}  tooltipComponent={<Tooltip />}  theme={{ stroke: { color: 'black', width: 0.5 }, scatter: { default: { width: 2, height: 2, rx: 1, color: 'black' }, selected: { color: 'red' } } }}  />
    
 
 </Chart>

@@ -31,7 +31,7 @@ const styles=StyleSheet.create(
             width:"95%",
             padding:5,
             borderRadius:6,
-            borderWidth:.76,
+            borderWidth:.5,
             borderColor:"lightgrey",
             display:"flex",
             flexDirection:"row",

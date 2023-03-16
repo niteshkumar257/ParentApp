@@ -3,7 +3,7 @@ import React from 'react'
 import NotificationCard from './NotificationCard'
 const feeIcon=require("../../assets/notificationFee.png")
 const Peformance=require("../../assets/PeformanceReport.png");
-const mentor=require("../../assets/mentor.png")
+const mentor=require("../../assets/presentation.png")
 
 const Notification = () => {
   return (
@@ -22,11 +22,11 @@ const styles=StyleSheet.create(
         mainContainer:{
             display:"flex",
             alignItems:"center",
-            height:"auto",
+            height:"100%",
             width:"100%",
             marginTop:10,
             rowGap:20,
-            backgroundColor:"white"
+          
           
         
         }

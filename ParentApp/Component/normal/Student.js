@@ -1,8 +1,10 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
-import StudentImage from "../../assets/Student.svg";
+import StudentImage from "../../assets/male.svg";
+import StudentImage2 from "../../assets/female.svg";
 
-const Student = ({navigation,name,Class,medium,board}) => {
+const Student = ({navigation,name,Class,medium,board,gender}) => {
+
 
    const clickHandler =()=>
    {
@@ -11,7 +13,9 @@ const Student = ({navigation,name,Class,medium,board}) => {
   return (
     <View  onStartShouldSetResponder={clickHandler} style={styles.container}>
  
-    <StudentImage  height={100} width={100}/>
+   { (gender==="Male") ? <StudentImage  height={130} width={130}/> :
+   <StudentImage2 height={130} width={130}/>
+    }
   
     <View  style={styles.subContainer}>
      
@@ -59,8 +63,9 @@ const styles=StyleSheet.create(
            width:"100%",
            display:"flex",
           justifyContent:"center",
-          rowGap:50,
+          rowGap:10,
           alignItems:"center",
+        
         
         
        
@@ -73,9 +78,10 @@ const styles=StyleSheet.create(
          width:140,
          display:"flex",
          flexDirection:"row",
-         columnGap:20,
+         columnGap:40,
          justifyContent:"center",
          alignItems:"center",
+        
         
        
        },
@@ -92,16 +98,19 @@ const styles=StyleSheet.create(
          justifyContent:"flex-start",
          alignContent:"center",
          columnGap:10,
-        
-         paddingLeft:10
+      
+         paddingLeft:10,
+      
        
 
        },
        text:{
-        fontSize:13,
-        fontWeight:500,
+        fontSize:18,
+        fontWeight:600,
         color:"black",
         textAlign:"center",
+        lineHeight:25,
+        letterSpacing:1.3
        
        }
        

@@ -10,10 +10,10 @@ const Children = ({navigation}) => {
 
   const studentDetails=[
     {
-        name:"Nitesh",Class:"11th",medium:"English",board:"CBSE"
+        name:"Nitesh",Class:"11th",medium:"English",board:"CBSE",gender:"Female"
     },
     {
-      name:"Swayam",Class:"12th",medium:"Hindi",board:"ICSE"
+      name:"Swayam",Class:"12th",medium:"Hindi",board:"ICSE",gender:"Male"
   }
   ]
  
@@ -42,7 +42,7 @@ const Children = ({navigation}) => {
      (
         <Student key={index} name={item.name} board={item.board} medium={item.medium}
            Class={item.Class}
-           navigation={navigation}
+           navigation={navigation} gender={item.gender}
           />
      ))
  }

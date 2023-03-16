@@ -4,9 +4,10 @@ import React ,{useEffect,useState} from 'react'
 
 
 const Screen1 = () => {
- const logo=require("../../assets/curriculum.png")
+ const logo=require("../../assets/data1.png")
   return (
     <View style={styles.container}> 
+  
      <Image style={styles.Image} source={logo}/>
   </View>
   )
@@ -26,14 +27,15 @@ const styles=StyleSheet.create(
     text:{
       fontSize:20,
       color:"black",
-      fontWeight:600
+      fontWeight:600,
+     
     },
     contentBox:{
       height:200,
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
-      
+       
       borderWidth:1,
       borderColor:"black",
     
@@ -63,8 +65,8 @@ const styles=StyleSheet.create(
 
     {
       height:300,
-      width:"98%",
-      padding:20
+      width:"100%",
+      padding:10
     }
 
   }
