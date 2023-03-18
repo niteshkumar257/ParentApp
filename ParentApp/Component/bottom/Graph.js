@@ -19,12 +19,25 @@ const Graph = () => {
     { quarter: "Sep", earnings: 85 },
     { quarter: "Nov", earnings: 42 },
     { quarter: "Dec", earnings: 90 },
+    { quarter: "Jan1", earnings: 89 },
+    { quarter: "Feb1", earnings: 56 },
+    { quarter: "Mar1", earnings: 45 },
+    { quarter: "Apr1", earnings: 19 },
+    { quarter: "May1", earnings: 13 },
+    { quarter: "Jun1", earnings: 65 },
+    { quarter: "Jul1", earnings: 42 },
+    { quarter: "Aug1", earnings: 19 },
+    { quarter: "Sep1", earnings: 85 },
+     { quarter: "Oct", earnings: 30 },
+   
+    { quarter: "Nov1", earnings: 42 },
+    { quarter: "Dec1", earnings: 90 },
    
   ];
   
   return (
     <View>
-         <VictoryChart width={420} theme={VictoryTheme.material}  domainPadding={10}>
+         <VictoryChart width={1000} theme={VictoryTheme.material}  domainPadding={10}>
           <VictoryBar 
           barWidth={10}
         

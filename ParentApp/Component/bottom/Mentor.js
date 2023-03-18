@@ -102,6 +102,14 @@ const styles = StyleSheet.create(
      padding:5,
     backgroundColor:"white",
       borderRadius: 9,
+      
+    
+      backgroundColor: 'white',
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
    
    
     
@@ -194,7 +202,7 @@ const styles = StyleSheet.create(
 
     },
      keyText: {
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: 400,
       flex:0.61,
       color:"#000"

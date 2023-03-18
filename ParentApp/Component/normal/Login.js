@@ -4,6 +4,7 @@ import { useState } from "react";
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 import Toast from 'react-native-toast-message';
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 
 const Login=({navigation})=>
@@ -42,10 +43,11 @@ const Login=({navigation})=>
           }),
         });
       result=await result.json();
-     
+        
     if(result.success==1)
 
     { 
+      console.log(jwt_decode(result.token).result.parent_id);
       setShow(false);
       showToast("success","Hi","Login successfully")
       navigation.navigate("children");
@@ -67,13 +69,13 @@ const Login=({navigation})=>
      
     }
     catch (error) {
-      console.warn(error);
+     
       setShow(false);
         navigation.navigate("notfound");
      
    }
   }else showToast("error","Warn","AllFields Required")
-  // navigation.navigate("home");
+  
  
    
 }

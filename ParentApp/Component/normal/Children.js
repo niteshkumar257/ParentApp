@@ -1,21 +1,31 @@
 import { View, Text,StyleSheet,TextInput } from 'react-native'
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import Student from './Student';
 
 import Headers from './header';
 import Toast from 'react-native-toast-message';
+import axios from "axios";
+
 
 const Children = ({navigation}) => {
 
+const [children,setChildren]=useState([]);
 
-  const studentDetails=[
-    {
-        name:"Nitesh",Class:"11th",medium:"English",board:"CBSE",gender:"Female"
-    },
-    {
-      name:"Swayam",Class:"12th",medium:"Hindi",board:"ICSE",gender:"Male"
-  }
-  ]
+useEffect(()=>
+{
+   axios.get('https://school-management-api.azurewebsites.net/parents/11/getChildren')
+   .then((res)=>
+   {
+    
+    setChildren(res.data.allChildren);
+    console.log(children);
+   }).catch((err)=>
+   {
+    console.log(err);
+   })
+},[])
+
+  
  
   const showToast = (type,header,msg="") => {
    
@@ -25,10 +35,7 @@ const Children = ({navigation}) => {
       text2: msg
     });
   }
-//  useEffect(()=>
-//   {
-//       showToast("success","Hi","Welcome back")
-//   },[])
+
   
  
     
@@ -38,11 +45,10 @@ const Children = ({navigation}) => {
         <View style={styles.ChildrenListContainer}>
         
  {
-     studentDetails.map((item,index)=>
+     children.map((item,index)=>
      (
-        <Student key={index} name={item.name} board={item.board} medium={item.medium}
-           Class={item.Class}
-           navigation={navigation} gender={item.gender}
+        <Student    key={item.child_id} name={item.child_name}  child_id={item.child_id}
+           navigation={navigation}
           />
      ))
  }

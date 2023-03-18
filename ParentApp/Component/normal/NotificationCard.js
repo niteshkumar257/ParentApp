@@ -37,7 +37,13 @@ const styles=StyleSheet.create(
             flexDirection:"row",
             alignItems:"center",
             columnGap:20,
-            backgroundColor:"white"
+            backgroundColor:"white",
+           
+            elevation: 5,
+            shadowColor: '#000',
+            shadowOffset: {width: 0, height: 0},
+            shadowOpacity: 0.1,
+            shadowRadius: 5,
             
 
         },

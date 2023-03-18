@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet ,TextInput} from 'react-native'
 import React from 'react'
 import Parent from "../../assets/Parent.svg";
-import Notification from "../../assets/Notification1.svg";
+import Icon from "react-native-vector-icons/Ionicons";
 
 
 const header = ({navigation}) => {
@@ -17,7 +17,7 @@ const header = ({navigation}) => {
       </View>
       <View style={styles.messager}>
         <Text style={styles.text}> 
-        Hi, Nitesh Kumar
+       Rama Chandra
         </Text>
        
       </View>
@@ -28,7 +28,7 @@ const header = ({navigation}) => {
           navigation.navigate("notification");
         }}
        style={styles.rightContainer}>
-        <Notification height={25} width={25}/>
+       <Icon name="notifications-outline" size={30} color={"black"}/>
       </View>
       
     </View>

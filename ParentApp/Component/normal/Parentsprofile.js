@@ -1,13 +1,36 @@
 import { View, Text ,StyleSheet,Image} from 'react-native'
-import React from 'react'
+import React ,{useEffect,useState}from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import Logout from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
 
 const parent= require("../../assets/mother.png");
 const Parentsprofile = ({navigation}) => {
     const logOutHandler = () => {
         navigation.navigate("login");
       }
+ const [parentInfo,setParentInfo]=useState({});
+ const [name,setName]=useState("");
+ const [email,setEmail]=useState("");
+ const [phone,setPhone]=useState("");
+ const [altPhone,setAltPhone]=useState("");
+  useEffect(()=>
+  {
+    axios.get('https://school-management-api.azurewebsites.net/parents/11')
+    .then((res)=>
+    {
+     
+    
+     console.log(res.data.parentDetails);
+      setName(res.data.parentDetails.father_name);
+      setEmail(res.data.parentDetails.email);
+      setPhone(res.data.parentDetails.whatsapp_no);
+      setAltPhone(res.data.parentDetails.alternative_mobile)
+    }).catch((err)=>
+    {
+     console.log(err);
+    })
+  },[])
   return (
     <View style={styles.main_container}>
          <View style={styles.top}>
@@ -25,22 +48,22 @@ const Parentsprofile = ({navigation}) => {
             </View>
             <View style={styles.infoBox}>
             <Text>Name</Text>
-            <Text style={styles.text}>Nitesh Kumar Reddy</Text>
+            <Text style={styles.text}>{name}</Text>
             </View>
 
             <View style={styles.infoBox}>
             <Text>Email</Text>
-            <Text style={styles.text}>niteshreddy257@gmail.com</Text>
+            <Text style={styles.text}>{email}</Text>
             </View>
 
             <View style={styles.infoBox}>
             <Text>Phone Number</Text>
-            <Text style={styles.text}>8249829096</Text>
+            <Text style={styles.text}>{phone}</Text>
             </View>
 
             <View style={styles.infoBox}>
             <Text>Alternate Number</Text>
-            <Text style={styles.text}>977823863</Text>
+            <Text style={styles.text}>{altPhone}</Text>
             </View>
           
            </View>

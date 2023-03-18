@@ -50,7 +50,7 @@ const AppNavigator = () => {
           <Stack.Screen
           name="notfound"
           component={Notfound}
-          options={{title:'Notfound'}}
+          options={{title:'Notfound',headerShown:false}}
           
           />
          <Stack.Screen

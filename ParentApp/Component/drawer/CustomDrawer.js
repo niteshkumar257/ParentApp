@@ -38,7 +38,7 @@ const CustomDrawer = ({ navigation }) => {
            <View>
           
              
-            <Text style={styles.text}>Nitesh Kumar </Text>
+            <Text style={styles.text}>Swayam </Text>
           
            </View>
          

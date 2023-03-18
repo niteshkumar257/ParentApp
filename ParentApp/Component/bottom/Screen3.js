@@ -1,17 +1,19 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React from 'react'
+import React ,{useEffect} from 'react'
 import Chart from './Chart'
 import DataTable from "./DataTable"
 import LineChart from './LineChart';
 import Chart1 from "./ScrolableChart";
 import Graph from './Graph';
+import axios from 'axios';
 
 const Screen3 = () => {
+ 
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.tableContainer}>
-        <Text style={styles.text}>Peformance Table</Text>
+       
       {/* <DataTable/> */}
         </View>
   
@@ -19,11 +21,12 @@ const Screen3 = () => {
 
         <View style={styles.chartContainer}>
         
-        <Chart type={"bezier"} color1={"#54f6d2"} color2={"#affae9"}/>
-        <Chart type={"bezier"} color1={"#d1e2f5"} color2={"#affae9"}/>
+        <Chart type={"bezier"} color1={"#54f6d2"} color2={"#affae9"} subject={"Physics"}/>
+        <Chart type={"bezier"} color1={"#d1e2f5"} color2={"#affae9"} subject={"Mathematics"}/>
+        <Chart type={"bezier"} color1={"#d1e2f5"} color2={"#affae9"} subject={"Biology"}/>
          <Graph/>
-         <LineChart/>
-         <Chart1/>
+       <Chart1/>
+        
         </View>
 
       </View>
@@ -53,11 +56,13 @@ const styles = StyleSheet.create(
 
     },
     chartContainer: {
-      width: "100%",
+      width:"100%",
       padding: 5,
       display: "flex",
       flexDirection: "column",
-      rowGap: 10
+      justifyContent:"center",
+      alignItems:"center",
+      rowGap: 35,
 
 
 

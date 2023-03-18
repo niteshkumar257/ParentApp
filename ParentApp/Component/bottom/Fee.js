@@ -1,9 +1,11 @@
 import { View, Text ,StyleSheet,TouchableOpacity} from 'react-native'
 import React from 'react'
 
-const Fee = ({nthInstallMent,status,amount,date}) => {
+const Fee = ({nthInstallMent,status,amount,date,totalFees}) => {
+  
   return (
     <View  style={styles.mainContainer}>
+      <Text>{totalFees}</Text>
           <View style={[styles.LeftContainer,status==="Paid"?styles.paid:styles.unpaid]}>
               <Text  style={styles.text}>
                {nthInstallMent}
@@ -12,7 +14,7 @@ const Fee = ({nthInstallMent,status,amount,date}) => {
           <View style={styles.RightContainer}>
             <View style={styles.amountContainer}>
               <Text style={{
-                  fontSize:30,
+                  fontSize:20,
                   fontWeight:600,
                   color:"black"
               }}>{amount}</Text>
@@ -22,14 +24,14 @@ const Fee = ({nthInstallMent,status,amount,date}) => {
            
             <View style={styles.dateContainer}>
               <Text style={[styles.keyText]}>Last Date</Text>
-              <Text style={[styles.valueText]}>23/2/23</Text>
+              <Text style={[styles.valueText]}>{date}</Text>
             
             </View>
             {
               status==="Paid" && 
               <View style={styles.dateContainer}>
               <Text style={[styles.keyText]}>Paid Date</Text>
-              <Text style={[styles.valueText]}>23/2/23</Text>
+              <Text style={[styles.valueText]}>{date}</Text>
             
             </View>
              }
@@ -53,6 +55,15 @@ const styles=StyleSheet.create(
      columnGap:5,
      borderRadius:9,
    
+     width: '100%',
+     backgroundColor: 'white',
+     elevation: 5,
+     shadowColor: '#000',
+     shadowOffset: {width: 0, height: 0},
+     shadowOpacity: 0.1,
+     shadowRadius: 5,
+     padding:10
+   
      
     },
     LeftContainer:{
@@ -62,6 +73,12 @@ const styles=StyleSheet.create(
        justifyContent:"center",
        alignItems:"center",
       borderRadius:9,
+      backgroundColor: 'white',
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
      
 
     },
@@ -74,8 +91,8 @@ const styles=StyleSheet.create(
       backgroundColor:"#ff3333"
     },
     text:{
-      fontSize:30,
-      fontWeight:700,
+      fontSize:20,
+      fontWeight:600,
       color:"white"
       
 

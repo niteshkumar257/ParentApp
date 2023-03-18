@@ -7,9 +7,11 @@ import Children from '../normal/Children';
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
+    <Drawer.Navigator
+  
+     drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
-        name="Student Details"
+        name=" Hi ,Swayam "
         component={Main}
         options={{headerShown: true}}
       />
