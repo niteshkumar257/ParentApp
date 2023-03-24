@@ -5,11 +5,14 @@ import Screen1 from './Screen1';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
 import Screen4 from './Screen4';
+import Video from './Videos';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import Fees from "../../assets/Fees.svg";
 import Curriculum from "../../assets/Curriculum1.svg";
 import Peformance from "../../assets/performance.svg";
 import Mentor from "../../assets/mentor.svg";
+
 
 
 
@@ -40,6 +43,11 @@ const BottomNavigator = () => {
             ? 'people-sharp'
             : 'people-outline';
         }
+        else if (route.name ==="videos") {
+          iconName = focused
+            ? 'videocam-sharp'
+            : 'videocam-outline';
+        }
 
         return <Icon name={iconName} size={35} color={"#1377c0"} style={{
          
@@ -51,6 +59,7 @@ const BottomNavigator = () => {
     <Tab.Screen name="Fees" component={Screen2} />
     <Tab.Screen name="Peformance" component={Screen3} />
     <Tab.Screen name="Mentor" component={Screen4} />
+    <Tab.Screen name="videos" component={Video} />
   </Tab.Navigator>
     
   )

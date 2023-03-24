@@ -18,7 +18,7 @@ const Fee = ({nthInstallMent,status,amount,date,totalFees}) => {
                   fontWeight:600,
                   color:"black"
               }}>{amount}</Text>
-              <Text style={[status==="Paid"?styles.paidText:styles.unpaidText]} >{status==="Paid"?"Paid":"Un_Paid"}</Text>
+              <Text style={[status==="Paid"?styles.paidText:styles.unpaidText]} >{status==="Paid"?"Paid":"UnPaid"}</Text>
               
             </View>
            
@@ -67,7 +67,7 @@ const styles=StyleSheet.create(
      
     },
     LeftContainer:{
-      height:120,
+      height:130,
     
       flex:1,
        justifyContent:"center",
@@ -76,14 +76,14 @@ const styles=StyleSheet.create(
       backgroundColor: 'white',
       elevation: 5,
       shadowColor: '#000',
-      shadowOffset: {width: 0, height: 0},
+      shadowOffset: {width: 2, height: 0},
       shadowOpacity: 0.1,
       shadowRadius: 5,
      
 
     },
     paid:{
-     backgroundColor:"#42ba96",
+     backgroundColor:"#5cb85c",
       // backgroundColor:"green"
     
     },
@@ -149,7 +149,7 @@ const styles=StyleSheet.create(
     paidText:{
     fontSize:20,
     fontWeight:500,
-    color:"#42ba96"
+    color:"#5cb85c"
     },
     unpaidText:{
       fontSize:20,

@@ -2,12 +2,15 @@ import { View, Text,StyleSheet,Dimensions ,TouchableOpacity} from 'react-native'
 import React ,{useState} from 'react'
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis ,Tooltip} from 'react-native-responsive-linechart'
 import Icon from "react-native-vector-icons/Ionicons";
+import { Svg, Circle } from 'react-native-svg';
 
 
 
 
 const {width}=Dimensions.get('screen');
-const ChartC = ({type,color1,color2,subject}) => {
+const ChartC = ({type,color1,color2,subject,data}) => {
+  console.log(data);
+  console.log(subject);
   const [month,setMonth]=useState(0);
   const [score,setScore]=useState(0);
   const [total,setTotal]=useState(0);
@@ -52,30 +55,16 @@ const ChartC = ({type,color1,color2,subject}) => {
       <Text style={styles.valueText}>{subject}</Text>
       <Chart
   style={{ height: 200, width:360 }}
-  data={[
-    { x: 1, y: 89 ,meta:100 },
-    { x: 2, y: 56,meta:100 },
-    { x: 3, y: 89,meta:100 },
-    { x: 4, y: 73,meta:100 },
-    { x: 5, y: 60,meta:100 },
-    { x: 6, y: 85 ,meta:100},
-    { x: 7, y: 90 ,meta:100},
-    { x: 8, y: 86,meta:100 },
-    { x: 9, y: 52,meta:100 },
-    { x:10, y: 54,meta:100 },
-    { x:11, y: 92,meta:100 },
-    { x:12 ,y: 15 ,meta:100},
-   
-  ]}
-  padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
+  data={data.markInfo}
+  padding={{ left: 20, bottom: 20, right: 20, top: 20 }}
   xDomain={{ min: 1, max: 12 }}
   yDomain={{ min: 0, max: 100 }}
 >
   <VerticalAxis tickCount={5} theme={{ 
        axis: {
-        visible: false,
+        visible: true,
         stroke: {
-          color: '#bbb',
+          color: 'black',
           width: 0,
           opacity: 1,
           dashArray: [2]
@@ -107,7 +96,7 @@ const ChartC = ({type,color1,color2,subject}) => {
         label: {
           color: '#000',
           fontSize: 10,
-          fontWeight: 400,
+          fontWeight:600,
           textAnchor: 'middle',
           opacity: 1,
           dx: 0,
@@ -156,7 +145,7 @@ const ChartC = ({type,color1,color2,subject}) => {
         label: {
           color: '#000',
           fontSize: 10,
-          fontWeight: 300,
+          fontWeight: 500,
           textAnchor: 'middle',
           opacity: 1,
           dx: 0,
@@ -171,21 +160,17 @@ const ChartC = ({type,color1,color2,subject}) => {
   />
   <Area
   smoothing={type}
-   theme={{ gradient: { from: { color:color1 }, to: { color:"white", opacity: 0.7 } }}} />
+   theme={{ gradient: { from: { color:color1,opacity:1}, to: { color:"white",opacity:1} , stops: [0.8, 1],}}} />
     <Line   smoothing={type}  
-    onTooltipSelect={(x,y,meta)=>
-    {
-      toolTip(x,y,meta);
-    }}
-    tooltipComponent={<Tooltip 
-     
-    />}
+    onTooltipSelect={(x,y,meta)=>{toolTip(x,y,meta);}}
+    tooltipComponent={<Tooltip/>}
     hideTooltipAfter={1000}
     hideTooltipOnDragEnd={false}
-
-  
-    
-    theme={{ stroke: { color: 'black', width: .5 }, scatter: { default: { width: 5, height: 5, rx: 3, color: color1 }, selected: { color: 'red' } } }}  />
+    theme={{ 
+         stroke: { color: 'black',width: 1,opacity: 1,dashArray: [5]},
+         scatter: { default: {width: 10,height: 10,dx: 0,dy: 0,rx: 10,color: 'lightgrey',},
+         selected: {width: 0,height: 0, dx: 0,dy: 0,rx: 0,color: 'white'},},
+           }} />
    
 
 </Chart>

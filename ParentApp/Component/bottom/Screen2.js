@@ -7,7 +7,7 @@ import AcitvityHandler from './AcitvityHandler';
 
 
 
-const Screen2 = () => {
+const Screen2 = ({navigation}) => {
 
 
  const [first,setFirst]=useState(0);
@@ -39,6 +39,8 @@ const Screen2 = () => {
 
      }).catch((err)=>
      {
+      setShowsActivity(false);
+      navigation.navigate("notfound");
       console.log(err);
      })
   },[])
@@ -49,7 +51,7 @@ const Screen2 = () => {
       showActivity ? <AcitvityHandler show={showActivity}/> :
     
     <View style={styles.container}>
-       <Text style={styles.header}>Fee Studetails</Text>
+     
       <Fee nthInstallMent={"1st"} status={firstSatus} amount={first} date={date1}/>
       <Fee nthInstallMent={"2nd"} status={secondSatus} amount={second} date={date2}/>
       <Fee nthInstallMent={"3rd"} status={thridSatus} amount={thrid} date={date3}/>
@@ -68,6 +70,7 @@ const styles=StyleSheet.create(
        flexDirection:"column",
        rowGap:30,
       padding:10,
+      paddingTop:50
       
     },
     header:{

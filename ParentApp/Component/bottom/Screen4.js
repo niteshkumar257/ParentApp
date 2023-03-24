@@ -5,7 +5,7 @@ import axios from "axios";
 import AcitvityHandler from './AcitvityHandler';
 
 
-const Screen4 = () => {
+const Screen4 = ({navigation}) => {
   const [MentorDetails,setMentorDetails]=useState([]);
   const [isLoding,setIsLoding]=useState(true);
   const getMentors=()=>
@@ -17,6 +17,7 @@ const Screen4 = () => {
       setIsLoding(false)
      }).catch((err)=>
      {
+      navigation.navigate("notfound");
       console.log(err)
      })
   }
@@ -33,7 +34,7 @@ const Screen4 = () => {
          
       { MentorDetails && 
         MentorDetails.map((item,index)=>(
-          <Mentor key={item.mentor_id} name={item.mentor_name}  
+          <Mentor key={item.mentor_id} name={item.mentor_name}   mentor_id={item.mentor_id}
           qualification={"MSc in Physics"}
            exp={"Academics"}
            details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }

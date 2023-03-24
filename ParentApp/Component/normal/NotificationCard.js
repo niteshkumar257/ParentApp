@@ -1,5 +1,6 @@
 import { View, Text,StyleSheet,Image } from 'react-native'
 import React from 'react'
+import Icon from "react-native-vector-icons/Ionicons";
 
 const NotificationCard = ({icon,msg}) => {
 
@@ -7,13 +8,16 @@ const NotificationCard = ({icon,msg}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.icons}>
-        <Image source={icon}/>
+      <Icon name="wallet-sharp" size={40} color={"#1377c0"}/>
       </View>
       <View style={styles.Info}>
       <Text style={{
         fontSize:13,
         fontWeight:500,
-        color:"black"
+        lineHeight:17,
+        color:"black",
+        letterSpacing:1
+        
       }}> 
       {msg}
       </Text>
@@ -47,10 +51,19 @@ const styles=StyleSheet.create(
             
 
         },
+        icons:{
+         
+           flex:1,
+           height:60,
+            justifyContent:"center",
+            alignItems:"center"
+ 
+        },
       
-        
+         
         Info:{
             height:"auto",
+            flex:3,
             width:"75%",
            
             padding:5

@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext ,useEffect} from "react";
 
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 import Toast from 'react-native-toast-message';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { AuthContext } from "../Context/Context";
 
 
 const Login=({navigation})=>
@@ -12,6 +13,8 @@ const Login=({navigation})=>
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
+  const {login}=useContext(AuthContext);
+
 
   const showToast = (type,header,msg="") => {
    
@@ -71,14 +74,22 @@ const Login=({navigation})=>
     catch (error) {
      
       setShow(false);
+      setUserName("");
+      setPassword("");
         navigation.navigate("notfound");
      
    }
   }else showToast("error","Warn","AllFields Required")
   
- 
+  // navigation.navigate("home");
    
 }
+
+
+// useEffect(()=>
+// {
+//     loginHandler();
+// },[])
   const changePassword=()=>
   {
       navigation.navigate("changePassword");
@@ -88,6 +99,7 @@ const Login=({navigation})=>
     <View style={style.main_container}>
       <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
     <View style={style.Logo_container}>
+
      <Image source={logo} style={style.image}/>
     </View>
     <View style={style.Info_container}>
@@ -108,7 +120,7 @@ const Login=({navigation})=>
      />
     </View>
     <View style={style.btn}>
-      <TouchableOpacity style={style.button} onPress={loginHandler}>
+      <TouchableOpacity style={style.button} onPress={()=>loginHandler()}>
         <Text style={style.text}>Log In</Text>
       </TouchableOpacity>
     </View>
@@ -178,7 +190,10 @@ display:"flex",
   
      display:"flex",
      justifyContent:"center",
-     alignItems:"center"
+     alignItems:"center",
+     
+
+
 
     
  },
