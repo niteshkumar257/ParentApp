@@ -5,9 +5,14 @@ const Card = ({subject,obtaindMark,totalMark}) => {
   return (
     <View>
       <View style={styles.CardContainer}>
+        <View style={styles.MarkContainer}>
         <Text style={styles.text}>{subject}</Text>
-        <Text style={styles.text}>{obtaindMark}</Text>
-        <Text style={styles.text}>{totalMark}</Text>
+        </View>
+       <View style={styles.MarkContainer}>
+       <Text style={styles.text}>{obtaindMark}/{totalMark}</Text>
+       </View>
+      
+        
       </View>
     </View>
   )
@@ -17,7 +22,7 @@ export default Card;
 const styles=StyleSheet.create(
     {
           CardContainer:{
-            width:"100%",
+            width:360,
             padding:10,
             display:"flex",
             height:40,
@@ -27,6 +32,9 @@ const styles=StyleSheet.create(
           columnGap:30,
             backgroundColor:"white",
             borderRadius:9
+          },
+          MarkContainer:{
+            
           },
           text:{
             fontSize:15,

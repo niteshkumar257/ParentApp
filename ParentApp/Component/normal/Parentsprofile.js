@@ -1,22 +1,28 @@
 import { View, Text ,StyleSheet,Image} from 'react-native'
-import React ,{useEffect,useState}from 'react'
+import React ,{useEffect,useState,useContext}from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import Logout from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { AuthContext } from '../Context/Context';
+
 
 const parent= require("../../assets/mother.png");
 const Parentsprofile = ({navigation}) => {
-    const logOutHandler = () => {
-        navigation.navigate("login");
-      }
+    // const logOutHandler = () => {
+    //     navigation.navigate("login");
+    //   }
  const [parentInfo,setParentInfo]=useState({});
  const [name,setName]=useState("");
  const [email,setEmail]=useState("");
  const [phone,setPhone]=useState("");
  const [altPhone,setAltPhone]=useState("");
+ const {logoutHandler,userToken}=useContext(AuthContext);
+ let userInfo=jwtDecode(userToken);
+let parentId=(userInfo.result.parent_id);
   useEffect(()=>
   {
-    axios.get('https://school-management-api.azurewebsites.net/parents/11')
+    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
     .then((res)=>
     {
      
@@ -75,7 +81,7 @@ const Parentsprofile = ({navigation}) => {
             <Icon name="settings-outline" size={20} color={"black"} />
             <Text style={styles.text}>Settings</Text>
           </View>
-          <View onStartShouldSetResponder={logOutHandler} style={[styles.boxContainer]}>
+          <View onStartShouldSetResponder={()=>logoutHandler(navigation)} style={[styles.boxContainer]}>
 
             <Logout name="logout" size={20} color={"black"} />
 

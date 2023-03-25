@@ -6,8 +6,8 @@ const Mark = ({id,data,testId,testDate}) => {
   return (
     <View style={styles.markContainer}>
         <View style={styles.header}>
-            <Text style={styles.headerText}>Id : {testId}</Text>
-            <Text style={styles.headerText}>Date :{testDate}</Text>
+            <Text style={styles.headerText}>Test No: {testId}</Text>
+            <Text style={styles.headerText}>Date: {testDate}</Text>
         </View>
         <View style={styles.rowData}>
             {

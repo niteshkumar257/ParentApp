@@ -1,14 +1,18 @@
 import { View, Text,StyleSheet ,Button,ScrollView} from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import Fee from "./Fee";
 import axios from 'axios';
 import AcitvityHandler from './AcitvityHandler';
+import DataContext from '../Context/DataContext';
+
 
 
 
 
 const Screen2 = ({navigation}) => {
 
+  const {id}=useContext(DataContext);
+  const [childId,setChildId]=useState(id);
 
  const [first,setFirst]=useState(0);
  const [second,setSecond]=useState(0);
@@ -22,7 +26,7 @@ const Screen2 = ({navigation}) => {
  const [showActivity,setShowsActivity]=useState(true);
   useEffect(()=>
   {
-     axios.get('https://school-management-api.azurewebsites.net/students/12/fees').then((res)=>
+     axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/fees`).then((res)=>
      {
       console.log(res.data.studentFees);
       console.log(res.data.studentFees[0].first_installment);

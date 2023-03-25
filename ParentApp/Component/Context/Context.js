@@ -1,62 +1,101 @@
 import React ,{createContext,useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const  AuthContext =createContext();
+import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import Toast from 'react-native-toast-message';
 
 export const AuthProvider=({children})=>
 {
     const [test,setTest]=useState("Hello");
-    const [isLoding,setIsLoding]=useState(true);
+    const [isLoding,setIsLoding]=useState(false);
     const [userToken,setUserToken]=useState(null);
+    const [userInfo,setUserInfo]=useState("");
+    const [navi,setNavi]=useState();
 
-    const login=(userName,password)=>
+    const showToast = (type,header,msg="") => {
+   
+      Toast.show({
+        type: type,
+        text1: header,
+        text2: msg
+      });
+    }
+    const loginHandler= async(username,password,navigation,setPassword,setUserName,showToast)=>
     {
-           
-        console.warn("funtion called");
-         if(userName && password)
-         {
-            setIsLoding(true);
-            axios.post(`https://school-management-api.azurewebsites.net/parent/login`,{
-                username:userName,
+     
+      
+          if(username && password)
+          {
+            console.log(username,password)
+              setIsLoding(true);
+               axios.post('https://school-management-api.azurewebsites.net/parent/login',{
+                username:username,
                 password:password
-            }).then((res)=>
-            {
+               }).then((res)=>
+               {
                 console.log(res.data);
-            }).catch((err)=>
-            {
+            setUserToken(res.data.token);
+            AsyncStorage.setItem('userToken',res.data.token);
+            setUserName("");
+            setPassword("");
+            setIsLoding(false);
+            navigation.navigate('home');
+            
+                
+               }).catch((err)=>
+               {
                 console.log(err);
-            })
+                setIsLoding(false);
+                setUserName("");
+                setPassword("");
+                navigation.navigate('notfound');
+               
 
-         }
-    }
-    const logout=()=>
+
+               })
+          }
+          else showToast("error","All Fields are Required")
+  }
+  
+  
+    const logoutHandler=(navigation)=>
     {
+
+        console.log("logout funtion");
         setUserToken(null);
-        AsyncStorage.removeItem(userToken);
+        AsyncStorage.removeItem('userToken');
         setIsLoding(false);
+        navigation.navigate("login");
+
+        
     }
-    const isLogin= async(email,password)=>
+    const isLogin= async(navigation)=>
     {
-        try{
-            setIsLoding(true);
-        let Usertokne=AsyncStorage.getItem('userToken');
-        setUserToken(userToken);
-        setIsLoding(false);
-
-          
-        } catch(e)
-        {
-            console.log("login error")
-        }
+        try {
+            const value = await AsyncStorage.getItem('userToken');
+            if(value) {
+                
+                console.log(value);
+               setUserToken(value);
+              navigation.navigate("children");
+              
+            
+            } else {
+              console.log('No data found');
+            }
+          } catch(e) {
+            
+            console.log(e);
+          }
 
     }
-useEffect(()=>
-{
-    isLogin();
-})
+
    return (
-    <AuthContext.Provider value={{login,logout}}>
+    <AuthContext.Provider value={{loginHandler,logoutHandler,userToken,isLogin,isLoding}}>
         {children}
+      
     </AuthContext.Provider>
    )
 }

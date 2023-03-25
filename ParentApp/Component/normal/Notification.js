@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet ,ScrollView} from 'react-native'
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useState,useContext} from 'react'
 import AcitvityHandler from '../bottom/AcitvityHandler'
 
 import NotificationCard from './NotificationCard'
@@ -7,14 +7,19 @@ const feeIcon=require("../../assets/notificationFee.png")
 const Peformance=require("../../assets/PeformanceReport.png");
 const mentor=require("../../assets/presentation.png")
 import axios from "axios";
+import { AuthContext } from '../Context/Context'
+import jwtDecode from 'jwt-decode'
 
 const Notification = () => {
   const [notificationList,setNotificatinList]=useState([]);
   const [isLoding,setIsLodiging]=useState(true);
   const [error,setError]=useState(false);
+  const {userToken}=useContext(AuthContext);
+  let userInfo=jwtDecode(userToken);
+let parentId=(userInfo.result.parent_id);
    const getNotification=()=>
    {
-    axios.get("https://school-management-api.azurewebsites.net/parents/11/getNotification")
+    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
     .then((res)=>
     {
       console.log(res.data.messages);

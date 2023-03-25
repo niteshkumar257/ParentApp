@@ -27,6 +27,7 @@ const Login=({navigation})=>
 
     
     if (newPassword && confirmPassword && username && oldPassword ) {
+      
 
       if(newPassword!=confirmPassword) showToast("error","Mismatch","New password and Confirmpassword are not same ")
       else {

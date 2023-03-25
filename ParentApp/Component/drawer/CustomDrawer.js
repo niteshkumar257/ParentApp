@@ -1,5 +1,5 @@
 import { View, Text,StyleSheet,SafeAreaView,Image } from 'react-native';
-import React from 'react';
+import React,{useContext} from 'react';
 import CommonCard from '../common/CommonCard';
 import User from "../../assets/user.svg";
 
@@ -9,6 +9,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Student from 'react-native-vector-icons/MaterialIcons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Parent from "../../assets/Parent2.svg";
+import { AuthContext } from "../Context/Context";
+
 const student=require("../../assets/Student.png");
 
 
@@ -18,15 +20,17 @@ const student=require("../../assets/Student.png");
 
 
 
-const CustomDrawer = ({ navigation }) => {
+const CustomDrawer = ({ navigation,child_name }) => {
 
-  const logOutHandler = () => {
-    navigation.navigate("login");
-  }
+  // const logOutHandler = () => {
+  //   navigation.navigate("login");
+  // }
+  console.log(child_name);
   const childrenHandler = () => {
     navigation.navigate("children");
   }
-
+  const {logoutHandler}=useContext(AuthContext);
+  console.log(logoutHandler);
   return (
     <SafeAreaView >
       <View style={styles.mainContainer}>
@@ -38,7 +42,7 @@ const CustomDrawer = ({ navigation }) => {
            <View>
           
              
-            <Text style={styles.text}>Swayam </Text>
+            <Text style={styles.text}>{child_name}</Text>
           
            </View>
          
@@ -56,7 +60,7 @@ const CustomDrawer = ({ navigation }) => {
             <Icon name="settings-outline" size={20} color={"black"} />
             <Text style={styles.text}>Settings</Text>
           </View>
-          <View onStartShouldSetResponder={logOutHandler} style={styles.boxContainer}>
+          <View onStartShouldSetResponder={()=>logoutHandler(navigation)} style={styles.boxContainer}>
 
             <AntDesign name="logout" size={20} color={"black"} />
 

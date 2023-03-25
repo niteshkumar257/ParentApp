@@ -5,15 +5,18 @@ import Main from './Main';
 import CustomDrawer from './CustomDrawer';
 import Children from '../normal/Children';
 const Drawer = createDrawerNavigator();
-const DrawerNavigator = () => {
+const DrawerNavigator = ({child_name,child_id}) => {
+    console.log("drawer"+child_name,child_id);
+
   return (
     <Drawer.Navigator
   
-     drawerContent={props => <CustomDrawer {...props} />}>
+     drawerContent={props => <CustomDrawer {...props} child_name={child_name} />}>
       <Drawer.Screen
-        name=" Hi ,Swayam "
+        name={child_name}
         component={Main}
-        options={{headerShown: true}}
+        initialParams={{child_id}}
+        options={{headerShown: false}}
       />
      
     </Drawer.Navigator>

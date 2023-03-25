@@ -4,14 +4,16 @@ import StudentImage from "../../assets/male.svg";
 import StudentImage2 from "../../assets/female.svg";
 
 const Student = ({navigation,name,child_id}) => {
+  console.log(name,child_id)
 
 
    const clickHandler =(id)=>
    {
-      console.log(id);
+      
       navigation.navigate("home",
       {
-         child_id:child_id
+         child_id:id,
+         child_name:name
       });
    }
   return (

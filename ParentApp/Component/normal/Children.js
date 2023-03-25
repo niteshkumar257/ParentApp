@@ -1,24 +1,32 @@
 import { View, Text,StyleSheet,TextInput } from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import Student from './Student';
 
 import Headers from './header';
 import Toast from 'react-native-toast-message';
 import axios from "axios";
+import { AuthContext } from '../Context/Context';
+import jwtDecode from 'jwt-decode';
+
+
 
 
 const Children = ({navigation}) => {
 
 const [children,setChildren]=useState([]);
+const {userToken}=useContext(AuthContext);
+let userInfo=jwtDecode(userToken);
+let parentId=(userInfo.result.parent_id);
+
 
 useEffect(()=>
 {
-   axios.get('https://school-management-api.azurewebsites.net/parents/11/getChildren')
+   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`)
    .then((res)=>
    {
     
     setChildren(res.data.allChildren);
-    console.log(children);
+    console.log(res.data.allChildren);
    }).catch((err)=>
    {
     console.log(err);

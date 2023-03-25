@@ -1,10 +1,33 @@
 import { View, Text,StyleSheet ,TextInput} from 'react-native'
-import React from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Parent from "../../assets/Parent.svg";
 import Icon from "react-native-vector-icons/Ionicons";
+import jwtDecode from 'jwt-decode';
+import { AuthContext } from '../Context/Context';
+import axios from 'axios';
 
 
 const header = ({navigation}) => {
+  const {userToken}=useContext(AuthContext)
+  let userInfo=jwtDecode(userToken);
+  let parentId=(userInfo.result.parent_id);
+  const [fatherName,setFatherName]=useState("");
+  const getParentInfo=()=>
+  {
+       axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`).then((res)=>
+       {
+         setFatherName(res.data.parentDetails.father_name);
+         console.log(res.data.parentDetails.father_name);
+       }).catch(err=>
+        {
+          console.log(err);
+        })
+      
+  }
+  useEffect(()=>
+  {
+    getParentInfo();
+  },[])
   return (
     <View style={styles.container}>
       
@@ -17,7 +40,7 @@ const header = ({navigation}) => {
       </View>
       <View style={styles.messager}>
         <Text style={styles.text}> 
-       Rama Chandra
+      {fatherName}
         </Text>
        
       </View>

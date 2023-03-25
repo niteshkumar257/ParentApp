@@ -7,6 +7,7 @@ import Screen3 from './Screen3';
 import Screen4 from './Screen4';
 import Video from './Videos';
 import Icon from 'react-native-vector-icons/Ionicons';
+import DataContext from '../Context/DataContext';
 
 import Fees from "../../assets/Fees.svg";
 import Curriculum from "../../assets/Curriculum1.svg";
@@ -18,16 +19,22 @@ import Mentor from "../../assets/mentor.svg";
 
 
 const Bottom = createBottomTabNavigator();
-const BottomNavigator = () => {
+const BottomNavigator = ({id}) => {
+ 
+ 
   const Tab = createBottomTabNavigator();
   return (
     
+    <DataContext.Provider value={{id}}>
+
+ 
      <Tab.Navigator 
      screenOptions={({route}) => ({
-      headerShown:false,
+    
       tabBarShowLabel: false,
-      tabBarInactiveTintColor: "#1377c0",
+      tabBarInactiveTintColor: "black",
        tabBarActiveBackgroundColor:"white",
+       tabBarInactiveBackgroundColor:"#ebe8e8",
       tabBarActiveTintColor:"black",
       tabBarIcon: ({color, size, focused}) => {
         let iconName;
@@ -61,6 +68,7 @@ const BottomNavigator = () => {
     <Tab.Screen name="Mentor" component={Screen4} />
     <Tab.Screen name="videos" component={Video} />
   </Tab.Navigator>
+  </DataContext.Provider>
     
   )
 };

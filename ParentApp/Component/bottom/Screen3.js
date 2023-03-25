@@ -11,9 +11,12 @@ import CharttWrapper from './CharttWrapper';
 import { AuthContext } from '../Context/Context';
 import { Wrapper } from 'victory-core';
 import Mark from './Mark';
+import DataContext from '../Context/DataContext';
 
 
 const Screen3 = () => {
+  const {id}=useContext(DataContext);
+  const [childId,setChildId]=useState(id);
  
   const [testDetails,setTestDetails]=useState([]);
   const [tableTestDetails,setTableTestDetails]=useState([]);
@@ -63,7 +66,7 @@ const tableDataConverter=(markList)=>
 }
   const getTestDetails=()=>
   {
-      axios.get('https://school-management-api.azurewebsites.net/students/12/performance')
+      axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/performance`)
       .then((res)=>
       {
        
@@ -90,7 +93,7 @@ const tableDataConverter=(markList)=>
       <View style={styles.container}>
         <View style={styles.tableContainer}>
      
-        {
+        {/* {
         tableTestDetails.map((item,index)=>
         (
             <Mark key={item.test_id} data={item.subjectMarkList} testId={item.test_id}
@@ -98,7 +101,7 @@ const tableDataConverter=(markList)=>
             />
         )
         )
-        }
+        } */}
         </View>
   
        

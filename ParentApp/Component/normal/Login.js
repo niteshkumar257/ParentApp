@@ -2,18 +2,17 @@ import React from "react";
 import { useState,useContext ,useEffect} from "react";
 
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
-import Toast from 'react-native-toast-message';
+
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { AuthContext } from "../Context/Context";
-
-
+import Toast from "react-native-toast-message";
 const Login=({navigation})=>
 {
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
-  const {login}=useContext(AuthContext);
+  const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
 
 
   const showToast = (type,header,msg="") => {
@@ -24,72 +23,11 @@ const Login=({navigation})=>
       text2: msg
     });
   }
-  const loginHandler= async()=>
-  {
-    
-   
-    if(username && password)
-    {
-      setShow(true);
-    try{
-      const url= `https://school-management-api.azurewebsites.net/parent/login`;
-      let result =await fetch(url,
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username:username,
-            password:password,
-          }),
-        });
-      result=await result.json();
-        
-    if(result.success==1)
-
-    { 
-      console.log(jwt_decode(result.token).result.parent_id);
-      setShow(false);
-      showToast("success","Hi","Login successfully")
-      navigation.navigate("children");
-      
-     
-      setPassword("");
-      setUserName("");
-    }
   
-    else 
-    {
-      setShow(false)
-      setUserName("");
-      setPassword("");
-      showToast("error","Unathenticated","Username or Password is wrong")
-    }
-    
-  
-     
-    }
-    catch (error) {
-     
-      setShow(false);
-      setUserName("");
-      setPassword("");
-        navigation.navigate("notfound");
-     
-   }
-  }else showToast("error","Warn","AllFields Required")
-  
-  // navigation.navigate("home");
-   
-}
-
-
-// useEffect(()=>
-// {
-//     loginHandler();
-// },[])
+useEffect(()=>
+{
+    isLogin(navigation)
+},[])
   const changePassword=()=>
   {
       navigation.navigate("changePassword");
@@ -120,7 +58,7 @@ const Login=({navigation})=>
      />
     </View>
     <View style={style.btn}>
-      <TouchableOpacity style={style.button} onPress={()=>loginHandler()}>
+      <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setUserName,setPassword,showToast)}>
         <Text style={style.text}>Log In</Text>
       </TouchableOpacity>
     </View>
