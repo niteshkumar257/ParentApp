@@ -11,8 +11,9 @@ export const AuthProvider=({children})=>
     const [test,setTest]=useState("Hello");
     const [isLoding,setIsLoding]=useState(false);
     const [userToken,setUserToken]=useState(null);
+    const [isLogoShow,setLogoShow]=useState(false);
     const [userInfo,setUserInfo]=useState("");
-    const [navi,setNavi]=useState();
+  
 
     const showToast = (type,header,msg="") => {
    
@@ -28,7 +29,7 @@ export const AuthProvider=({children})=>
       
           if(username && password)
           {
-            console.log(username,password)
+            console.log(username);
               setIsLoding(true);
                axios.post('https://school-management-api.azurewebsites.net/parent/login',{
                 username:username,
@@ -41,7 +42,7 @@ export const AuthProvider=({children})=>
             setUserName("");
             setPassword("");
             setIsLoding(false);
-            navigation.navigate('home');
+            navigation.navigate('children');
             
                 
                }).catch((err)=>
@@ -83,6 +84,7 @@ export const AuthProvider=({children})=>
               
             
             } else {
+              navigation.navigate("login");
               console.log('No data found');
             }
           } catch(e) {

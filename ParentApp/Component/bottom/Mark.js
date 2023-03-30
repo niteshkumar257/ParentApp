@@ -1,18 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Card from './Card'
-const Mark = ({id,data,testId,testDate}) => {
-    console.log(data);
+const Mark = ({data,testId,testDate}) => {
+
+    console.log("performance table",data,testId,testDate);
+    const dateStr = testDate;
+    const parts = dateStr.split("-");
+    const formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
   return (
     <View style={styles.markContainer}>
         <View style={styles.header}>
             <Text style={styles.headerText}>Test No: {testId}</Text>
-            <Text style={styles.headerText}>Date: {testDate}</Text>
+            <Text style={styles.headerText}>Date: {formattedDate}</Text>
         </View>
+       
         <View style={styles.rowData}>
             {
-                data.map((item,index)=>(
-                    <Card subject={item.subjectName} obtaindMark={item.obtained_mark} totalMark={item.total_marks}/>
+                data.map(  (item,index)=>(
+                    <Card key={index} subject={item.subjectName} obtaindMark={item.obtained_mark} totalMark={item.total_marks}/>
                 ))
             }
            
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"flex-start",
         height:"auto",
-        backgroundColor: '#1377c0',
+        backgroundColor: '#318CE7',
         elevation: 5,
         shadowColor: '#000',
         width:"100%",
@@ -49,7 +54,11 @@ const styles = StyleSheet.create({
           flexDirection:"row",
          width:"100%",
          justifyContent:"space-around",
-         
+         borderWidth:4,
+          borderBottomColor:"white",
+          borderRightWidth:0,
+          borderLeftWidth:0,
+          borderTopWidth:0,
           borderRadius:9,
           paddingBottom:5,
           paddingtop:5,
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
 
     },
     headerText:{
-       fontSize:20,
+       fontSize:15,
        fontWeight:500,
        height:40,
        color:"white",
@@ -73,12 +82,16 @@ const styles = StyleSheet.create({
     rowData:{
         display:"flex",
         width:"100%",
-        flexDirection:"column",
+        flexDirection:"row",
+        columnGap:20,
         rowGap:10,
+        // width:150,
         justifyContent:"flex-start",
         alignItems:"center",
-        
-        padding:10
+        flexWrap:"wrap",
+        padding:10,
+        backgroundColor:"#E1EBEE",
+        borderRadius:9
 
     }
 })

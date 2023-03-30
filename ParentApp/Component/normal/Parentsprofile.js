@@ -78,12 +78,12 @@ let parentId=(userInfo.result.parent_id);
 
          <View style={styles.logoutContainer}>
           <View style={styles.boxContainer}>
-            <Icon name="settings-outline" size={20} color={"black"} />
+            <Icon name="settings-sharp" size={20} color={"white"} />
             <Text style={styles.text}>Settings</Text>
           </View>
           <View onStartShouldSetResponder={()=>logoutHandler(navigation)} style={[styles.boxContainer]}>
 
-            <Logout name="logout" size={20} color={"black"} />
+            <Logout name="logout" size={20} color={"white"} />
 
 
             <Text style={styles.text} >Logout</Text>
@@ -119,6 +119,7 @@ const styles=StyleSheet.create(
             display:"flex",
             flexDirection:"row",
         columnGap:10,
+        padding:10,
             
         },
         image:{
@@ -146,6 +147,15 @@ const styles=StyleSheet.create(
            paddingVertical: 10,
     paddingHorizontal: 10,
     marginVertical: 10,
+    backgroundColor: 'white',
+    elevation: 5,
+    shadowColor: '#000',
+    width:"100%",
+    padding:10,
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    borderRadius:9
    
         },
         
@@ -172,6 +182,7 @@ const styles=StyleSheet.create(
             alignItem:"center",
             paddingLeft:10,
             paddingRight:10,
+            
          
             rowGap:20,
             
@@ -190,7 +201,15 @@ const styles=StyleSheet.create(
             borderRadius:6,
             borderColor:"lightgrey",
             paddingLeft:30,
-            height:50
+            height:50,
+            backgroundColor: '#318CE7',
+            elevation: 5,
+            shadowColor: '#000',
+            width:"100%",
+            padding:10,
+            shadowOffset: {width: 0, height: 0},
+            shadowOpacity: 0.1,
+            shadowRadius: 5,
       
       
       
@@ -199,7 +218,7 @@ const styles=StyleSheet.create(
         text:{
           fontSize:15,
           fontWeight:500,
-          color:"black"
+          color:"white"
         },
         shadowProp: {  
             shadowOffset: {width: -2, height: 4},  

@@ -5,7 +5,8 @@ import Screen1 from './Screen1';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
 import Screen4 from './Screen4';
-import Video from './Videos';
+
+import VideoStackNavigator from './VideoStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DataContext from '../Context/DataContext';
 
@@ -32,14 +33,30 @@ const BottomNavigator = ({id}) => {
      screenOptions={({route}) => ({
     
       tabBarShowLabel: false,
-      tabBarInactiveTintColor: "black",
-       tabBarActiveBackgroundColor:"white",
-       tabBarInactiveBackgroundColor:"#ebe8e8",
-      tabBarActiveTintColor:"black",
-      tabBarIcon: ({color, size, focused}) => {
+      tabBarLabel:"nitesh",
+      tabBarInactiveTintColor: "wh",
+       tabBarActiveBackgroundColor:"#318CE7",
+       tabBarInactiveBackgroundColor:"black",
+      tabBarActiveTintColor:"white",
+      tabBarHeaderStyle:{
+
+      },
+    
+      tabBarIconStyle:{
+          
+      },
+      tabBarLabelStyle:{
+        fontSize:20,
+        color:"red",
+      },
+      tabBarOptions: {
+        activeTintColor: '#cd077d',
+
+    },
+      tabBarIcon: ({color, size=50, focused}) => {
         let iconName;
 
-        if (route.name ==="Curriculum") {
+        if (route.name === "Curriculum") {
           iconName = focused ? 'school-sharp' : 'school-outline';
         } else if (route.name ==="Fees") {
           iconName = focused ? 'wallet-sharp' : 'wallet-outline';
@@ -50,23 +67,29 @@ const BottomNavigator = ({id}) => {
             ? 'people-sharp'
             : 'people-outline';
         }
-        else if (route.name ==="videos") {
+        else if (route.name ==="Subjects") {
           iconName = focused
-            ? 'videocam-sharp'
-            : 'videocam-outline';
+            ? 'logo-youtube'
+            : 'logo-youtube';
         }
 
-        return <Icon name={iconName} size={35} color={"#1377c0"} style={{
+        return <Icon name={iconName} size={35}  color={"white"} style={{
          
         }}/>;
+        
       },
     })}
      >
     <Tab.Screen name="Curriculum" component={Screen1} />
     <Tab.Screen name="Fees" component={Screen2} />
     <Tab.Screen name="Peformance" component={Screen3} />
-    <Tab.Screen name="Mentor" component={Screen4} />
-    <Tab.Screen name="videos" component={Video} />
+    <Tab.Screen name="Mentor" component={Screen4} options={{
+      headerTintColor: 'red',
+    
+    }} />
+    <Tab.Screen name="Subjects" component={VideoStackNavigator} options={{
+      title:"All Subjects",tabBarShowLabel:false,headerShown:false,
+    }} />
   </Tab.Navigator>
   </DataContext.Provider>
     

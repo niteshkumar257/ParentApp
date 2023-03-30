@@ -4,13 +4,13 @@ import StudentImage from "../../assets/male.svg";
 import StudentImage2 from "../../assets/female.svg";
 
 const Student = ({navigation,name,child_id}) => {
-  console.log(name,child_id)
+   console.log("student page",name,child_id);
 
 
    const clickHandler =(id)=>
    {
-      
-      navigation.navigate("home",
+    console.log("studnet on click",id);
+     navigation.navigate("home",
       {
          child_id:id,
          child_name:name
@@ -19,7 +19,7 @@ const Student = ({navigation,name,child_id}) => {
   return (
     <View  onStartShouldSetResponder={()=>clickHandler(child_id)} style={styles.container}>
  
-  <StudentImage  height={130} width={130}/> 
+  <StudentImage  height={100} width={100}/> 
   
   
     <View  style={styles.subContainer}>

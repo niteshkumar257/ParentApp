@@ -35,10 +35,13 @@ const CustomDrawer = ({ navigation,child_name }) => {
     <SafeAreaView >
       <View style={styles.mainContainer}>
         <View style={styles.profileContainer}>
-        <Image source={student}  style={{
-          height:50,
-          width:50
+          <View style={styles.ImageContainer}>
+          <Image source={student}  style={{
+          height:70,
+          width:70
         }}/>
+          </View>
+       
            <View>
           
              
@@ -50,22 +53,22 @@ const CustomDrawer = ({ navigation,child_name }) => {
         <View style={styles.listContainer}>
 
         <View onStartShouldSetResponder={childrenHandler} style={styles.ListItemContainer}>
-           <AntDesign name="user" size={20} color={"black"}/>
-          <Text style={styles.text}>Childrens</Text>
+           <Icon name="person-circle-sharp" size={25} color={"#318CE7"}/>
+          <Text style={styles.text1}>Childrens</Text>
         </View>
         </View>
         <View style={styles.logOutMainContainer}>
         <View style={styles.logoutContainer}>
           <View style={styles.boxContainer}>
-            <Icon name="settings-outline" size={20} color={"black"} />
-            <Text style={styles.text}>Settings</Text>
+            <Icon name="settings-sharp" size={25} color={"#318CE7"} />
+            <Text style={styles.text1}>Settings</Text>
           </View>
           <View onStartShouldSetResponder={()=>logoutHandler(navigation)} style={styles.boxContainer}>
 
-            <AntDesign name="logout" size={20} color={"black"} />
+            <Icon name="log-out-sharp" size={25} color={"#318CE7"}  />
 
 
-            <Text style={styles.text} >Logout</Text>
+            <Text style={styles.text1} >Logout</Text>
           </View>
 
         </View>
@@ -102,7 +105,8 @@ const styles = StyleSheet.create(
       borderWidth: .5,
       borderColor: "lightgrey",
       borderLeftWidth: 0,
-      borderRightWidth: 0
+      borderRightWidth: 0,
+      backgroundColor:"#318CE7"
 
 
 
@@ -177,10 +181,25 @@ const styles = StyleSheet.create(
 
     text: {
       fontSize: 20,
-      color: "black"
+      color: "white"
     },
     subtext:{
 
+    },
+    text1:{
+      fontSize:18,
+      color:"black"
+    
+    },
+    ImageContainer:{
+      backgroundColor:"white",
+      height:100,
+      width:100,
+      display:"flex",
+      justifyContent:"center",
+      alignItems:"center",
+     
+      borderRadius:50
     }
 
   }

@@ -22,7 +22,7 @@ export default Card;
 const styles=StyleSheet.create(
     {
           CardContainer:{
-            width:360,
+            width:155,
             padding:10,
             display:"flex",
             height:40,
@@ -37,7 +37,7 @@ const styles=StyleSheet.create(
             
           },
           text:{
-            fontSize:15,
+            fontSize:12,
             color:"black",
             fontWeight:600
             

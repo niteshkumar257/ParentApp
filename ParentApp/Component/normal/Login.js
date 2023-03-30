@@ -1,9 +1,10 @@
 import React from "react";
 import { useState,useContext ,useEffect} from "react";
+import axios from "axios";
 
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 
-import axios from "axios";
+
 import jwt_decode from "jwt-decode";
 import { AuthContext } from "../Context/Context";
 import Toast from "react-native-toast-message";
@@ -13,6 +14,7 @@ const Login=({navigation})=>
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
   const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
+  // console.log(loginHandler,isLoding,isLogin);
 
 
   const showToast = (type,header,msg="") => {
@@ -24,10 +26,71 @@ const Login=({navigation})=>
     });
   }
   
-useEffect(()=>
+// useEffect(()=>
+// {
+//   console.log("useEffect");
+//     isLogin(navigation)
+// },[])
+const login= async ()=>
 {
-    isLogin(navigation)
-},[])
+  // navigation.navigate("children");
+  // console.warn(username, password);
+  // setShow(true);
+  // axios.post(`https://school-management-api.azurewebsites.net/parent/login`,{
+  //   username,password
+  // }).then((res)=>
+  // {
+  //   console.log(res);
+  //   setShow(false);
+  //   // navigation.navigate("children");
+  // }).catch(err=>
+  //   {
+  //     console.log(err);
+  //     setShow(false);
+  //     // navigation.navigate("notfound");
+  //   })
+
+  // axios.post('https://school-management-api.azurewebsites.net/parent/login',{
+  //   username:username,
+  //   password:password
+  // }).then((res)=>
+  // {
+  //   console.log(res);
+  // }).catch((err)=>
+  // {
+  //   console.log(err);
+  // })
+  // axios.get('https://school-management-api.azurewebsites.net/parents/15/getChildren').then((res)=>
+  // {
+  //   console.log(res.data);
+  // }).catch(err=>
+  //   {
+  //     console.log(err);
+  //   })
+
+  // try {
+  //   const response = await axios.post('https://school-management-api.azurewebsites.net/admin/login', {
+  //     // data to be sent in the request body
+  //     username: username,
+  //     password: password,
+  //   });
+  //   console.log(response.data);
+  // } catch (error) {
+  //   console.error(error);
+  // }
+
+  // axios.post('https://school-management-api.azurewebsites.net/parent/login',
+  // {
+  //   username:username,
+  //   password:password
+  // }).then((res)=>
+  // {
+  //   console.log(res.data);
+  // }).catch((err)=>
+  // {
+  //   console.log(err);
+  // })
+}
   const changePassword=()=>
   {
       navigation.navigate("changePassword");
@@ -58,7 +121,7 @@ useEffect(()=>
      />
     </View>
     <View style={style.btn}>
-      <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setUserName,setPassword,showToast)}>
+      <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setPassword,setUserName,showToast)}>
         <Text style={style.text}>Log In</Text>
       </TouchableOpacity>
     </View>

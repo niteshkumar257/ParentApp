@@ -26,6 +26,7 @@ const Screen2 = ({navigation}) => {
  const [showActivity,setShowsActivity]=useState(true);
   useEffect(()=>
   {
+    console.log("fee",childId);
      axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/fees`).then((res)=>
      {
       console.log(res.data.studentFees);
@@ -74,7 +75,9 @@ const styles=StyleSheet.create(
        flexDirection:"column",
        rowGap:30,
       padding:10,
-      paddingTop:50
+      paddingTop:20,
+      color:"white"
+      
       
     },
     header:{
