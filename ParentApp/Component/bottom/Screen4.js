@@ -1,28 +1,50 @@
 import { View, Text ,StyleSheet,SafeAreaView,ScrollView} from 'react-native'
-import React from 'react'
+import React ,{useEffect,useState} from 'react'
 import Mentor from './Mentor';
+import axios from "axios";
+import AcitvityHandler from './AcitvityHandler';
 
-const Screen4 = () => {
+
+const Screen4 = ({navigation}) => {
+  const [MentorDetails,setMentorDetails]=useState([]);
+  const [isLoding,setIsLoding]=useState(true);
+  const getMentors=()=>
+  {
+     axios.get("https://school-management-api.azurewebsites.net/mentors")
+     .then((res)=>{
+      console.log(res.data.mentors);
+      setMentorDetails(res.data.mentors);
+      setIsLoding(false)
+     }).catch((err)=>
+     {
+      navigation.navigate("notfound");
+      console.log(err)
+     })
+  }
+  useEffect(()=>
+  {
+      getMentors();
+  },[])
   return (
     <ScrollView>
+      {
+        isLoding  ? <AcitvityHandler show={isLoding}/> :
+      
          <View style={styles.container}>
          
-       <Mentor name={"MB sharma"}  
-       qualification={"MSc in Physics"}
-        exp={"Academics"}
-        details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }
-        />
-          <Mentor name={"R sharma"}  
-       qualification={"MSc in Physics"}
-        exp={"Academics"}
-        details={"20 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ratan Taata foundation ,TCS"}
-        />
-         <Mentor name={"AK sharma"}  
-       qualification={"MSc in Physics"}
-        exp={"Academics"}
-        details={"20 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ratan Taata foundation ,TCS"}
-        />
+      { MentorDetails && 
+        MentorDetails.map((item,index)=>(
+          <Mentor key={item.mentor_id} name={item.mentor_name}   mentor_id={item.mentor_id}
+          qualification={"MSc in Physics"}
+           exp={"Academics"}
+           details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }
+           />
+        ))
+      }
+       
+       
     </View>
+}
     </ScrollView>
      
     

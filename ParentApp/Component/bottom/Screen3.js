@@ -1,30 +1,121 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, ScrollView,TouchableOpacity ,ActivityIndicator} from 'react-native'
+import React, { useEffect, useState, useContext } from 'react'
 import Chart from './Chart'
-import DataTable from "./DataTable"
-import LineChart from './LineChart';
-import Chart1 from "./ScrolableChart";
-import Graph from './Graph';
+
+import axios from 'axios';
+
+import { AuthContext } from '../Context/Context';
+
+import Mark from './Mark';
+import DataContext from '../Context/DataContext';
+
 
 const Screen3 = () => {
-  return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.tableContainer}>
-        <Text style={styles.text}>Peformance Table</Text>
-      {/* <DataTable/> */}
-        </View>
-  
-       
+  const { id } = useContext(DataContext);
+  const [childId, setChildId] = useState(id);
+  const [testFetchStatus,setTestFetchStatus]=useState(false);
+  const [testDetails, setTestDetails] = useState([]);
+  const [tableTestDetails, setTableTestDetails] = useState([]);
+  const [toggleGraphShow,setToggleGraphShow]=useState(false);
 
-        <View style={styles.chartContainer}>
+
+
+  const graphShowToggleHandler=()=>
+  {
+      setToggleGraphShow(true);
+  }
+  const { test } = useContext(AuthContext);
+  let dataList = [];
+  const dataConvert = (markList) => {
+    dataList = markList?.reduce((acc, test) => {
+      test.subject_name.forEach((subject, index) => {
+        const markInfo = {
+          x: new Date(test.test_date).getMonth() + 1,
+          y: test.mark_obtained[index],
+          meta: test.total_marks[index],
+        };
+        const subjectIndex = acc.findIndex(item => item.subjectName === subject);
+        if (subjectIndex === -1) {
+          acc.push({ subjectName: subject, markInfo: [markInfo] });
+        } else {
+          acc[subjectIndex].markInfo.push(markInfo);
+        }
+      });
+      return acc;
+    }, []);
+
+    dataList?.map((data) => {
+      data.markInfo.sort((a, b) => a.x - b.x);
+    })
+
+    return dataList;
+
+
+  }
+
+  const tableDataConverter = (markList) => {
+    const tableList = markList?.map((mark) => ({
+      test_id: mark.test_id,
+      test_date: new Date(mark.test_date).toISOString().substr(0, 10),
+      subjectMarkList: mark.subject_name.map((subject, i) => ({
+        subjectName: subject,
+        obtained_mark: mark.mark_obtained[i],
+        total_marks: mark.total_marks[i],
+      })),
+    }));
+    return tableList;
+  }
+  const getTestDetails = () => {
+    setTestFetchStatus(true);
+    axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/performance`)
+      .then((res) => {
         
-        <Chart type={"bezier"} color1={"#54f6d2"} color2={"#affae9"}/>
-        <Chart type={"bezier"} color1={"#d1e2f5"} color2={"#affae9"}/>
-         <Graph/>
-         <LineChart/>
-         <Chart1/>
+        setTestDetails(dataConvert(res.data.allmarksDetail));
+        setTableTestDetails(tableDataConverter(res.data.allmarksDetail)); 
+        setTestFetchStatus(false);
+          
+         })
+        .catch((err) => {
+        console.log(err);
+      
+      })
+  }
+  useEffect(() => {
+    
+    getTestDetails();
+  }, [])
+  
+  
+  return (
+    <ScrollView overScrollMode="never" removeClippedSubviews={true}>
+     
+    
+      <View style={styles.container}>
+       {  testFetchStatus &&  <ActivityIndicator  size={25} animating={testFetchStatus} />}
+        <View style={styles.tableContainer}>
+
+          {tableTestDetails?.map((item, index) =>
+            (
+              <Mark key={item.test_id} data={item.subjectMarkList} testId={item.test_id}
+                testDate={item.test_date}/>
+            )
+            )
+          }
         </View>
+{
+     !toggleGraphShow &&   <TouchableOpacity style={styles.showGraphButton} onPress={graphShowToggleHandler}>
+          <Text style={styles.graphButtonText}>Show graphical analysis</Text>
+        </TouchableOpacity>}
+{
+     toggleGraphShow &&    <View style={styles.chartContainer}>
+          {
+            testDetails?.map((item, index) =>
+            (
+              <Chart key={index} data={item} type={"bezier"} color1={"#2BC0E4"} color2={"#affae9"} subject={item.subjectName} />
+            ))
+          }
+
+        </View>}
 
       </View>
     </ScrollView>
@@ -39,7 +130,7 @@ const styles = StyleSheet.create(
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor:"white"
+      backgroundColor: "white"
 
     },
     tableContainer: {
@@ -47,8 +138,8 @@ const styles = StyleSheet.create(
       padding: 10,
       display: "flex",
       flexDirection: "column",
-      rowGap:20,
-      backgroundColor:"white"
+      rowGap: 10,
+      backgroundColor: "white"
 
 
     },
@@ -57,21 +148,37 @@ const styles = StyleSheet.create(
       padding: 5,
       display: "flex",
       flexDirection: "column",
-      rowGap: 10
+      justifyContent: "center",
+      alignItems: "center",
+      rowGap: 35,
 
 
 
 
     },
-    subjectTitle:{
-      fontSize:15,
-      fontWeight:500,
-      color:"black"
+    subjectTitle: {
+      fontSize: 15,
+      fontWeight: 500,
+      color: "black"
 
     },
     text: {
       fontSize: 20,
       color: "black"
+    },
+    showGraphButton:{
+        width:'90%',
+        backgroundColor:"green",
+        height:40,
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    graphButtonText:{
+      fontSize:15,
+      fontWeight:500,
+      color:"white"
+
     }
   }
 )

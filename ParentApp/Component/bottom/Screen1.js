@@ -1,9 +1,13 @@
 import { View, Text ,StyleSheet,ScrollView,FlatList,Image} from 'react-native'
-import React ,{useEffect,useState} from 'react'
+import React ,{useEffect,useState,useContext} from 'react'
+import DataContext from '../Context/DataContext'
 
 
 
 const Screen1 = () => {
+   
+  const {id}=useContext(DataContext);
+  const [childId,setChildId]=useState(id);
  const logo=require("../../assets/data1.png")
   return (
     <View style={styles.container}> 

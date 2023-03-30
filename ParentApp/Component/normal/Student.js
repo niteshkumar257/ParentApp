@@ -3,38 +3,32 @@ import React from 'react'
 import StudentImage from "../../assets/male.svg";
 import StudentImage2 from "../../assets/female.svg";
 
-const Student = ({navigation,name,Class,medium,board,gender}) => {
+const Student = ({navigation,name,child_id}) => {
+   console.log("student page",name,child_id);
 
 
-   const clickHandler =()=>
+   const clickHandler =(id)=>
    {
-      navigation.navigate("home");
+    console.log("studnet on click",id);
+     navigation.navigate("home",
+      {
+         child_id:id,
+         child_name:name
+      });
    }
   return (
-    <View  onStartShouldSetResponder={clickHandler} style={styles.container}>
+    <View  onStartShouldSetResponder={()=>clickHandler(child_id)} style={styles.container}>
  
-   { (gender==="Male") ? <StudentImage  height={130} width={130}/> :
-   <StudentImage2 height={130} width={130}/>
-    }
+  <StudentImage  height={100} width={100}/> 
+  
   
     <View  style={styles.subContainer}>
      
     <View style={styles.infoContainer}>
-         <Text>Name</Text>
+         <Text style={styles.text}>Name:</Text>
          <Text  style={styles.text}>{name}</Text>
       </View>
-      <View style={styles.infoContainer}>
-         <Text>Class</Text>
-         <Text  style={styles.text}>{Class}</Text>
-      </View>
-      <View style={styles.infoContainer}>
-         <Text>Medium</Text>
-         <Text  style={styles.text}>{medium}</Text>
-      </View>
-      <View style={styles.infoContainer}>
-         <Text>Board</Text>
-         <Text  style={styles.text}>{board}</Text>
-      </View>
+     
   
     </View>
    
@@ -52,7 +46,9 @@ const styles=StyleSheet.create(
        width:"100%",
        height:"100%",
         display:"flex",
-        backgroundColor:"white"
+        backgroundColor:"white",
+       
+       
         
         
         
@@ -65,6 +61,11 @@ const styles=StyleSheet.create(
           justifyContent:"center",
           rowGap:10,
           alignItems:"center",
+          elevation: 5,
+          shadowColor: '#000',
+          shadowOffset: {width: 0, height: 0},
+          shadowOpacity: 0.1,
+          shadowRadius: 5,
         
         
         

@@ -1,16 +1,21 @@
 import React from "react";
-import { useState } from "react";
-
-import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
-import Toast from 'react-native-toast-message';
+import { useState,useContext ,useEffect} from "react";
 import axios from "axios";
 
+import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 
+
+import jwt_decode from "jwt-decode";
+import { AuthContext } from "../Context/Context";
+import Toast from "react-native-toast-message";
 const Login=({navigation})=>
 {
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
+  const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
+  // console.log(loginHandler,isLoding,isLogin);
+
 
   const showToast = (type,header,msg="") => {
    
@@ -20,62 +25,71 @@ const Login=({navigation})=>
       text2: msg
     });
   }
-  const loginHandler= async()=>
-  {
-    
-   
-    if(username && password)
-    {
-      setShow(true);
-    try{
-      const url= `https://school-management-api.azurewebsites.net/parent/login`;
-      let result =await fetch(url,
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username:username,
-            password:password,
-          }),
-        });
-      result=await result.json();
-     
-    if(result.success==1)
+  
+// useEffect(()=>
+// {
+//   console.log("useEffect");
+//     isLogin(navigation)
+// },[])
+const login= async ()=>
+{
+  // navigation.navigate("children");
+  // console.warn(username, password);
+  // setShow(true);
+  // axios.post(`https://school-management-api.azurewebsites.net/parent/login`,{
+  //   username,password
+  // }).then((res)=>
+  // {
+  //   console.log(res);
+  //   setShow(false);
+  //   // navigation.navigate("children");
+  // }).catch(err=>
+  //   {
+  //     console.log(err);
+  //     setShow(false);
+  //     // navigation.navigate("notfound");
+  //   })
 
-    { 
-      setShow(false);
-      showToast("success","Hi","Login successfully")
-      navigation.navigate("children");
-      
-     
-      setPassword("");
-      setUserName("");
-    }
-  
-    else 
-    {
-      setShow(false)
-      setUserName("");
-      setPassword("");
-      showToast("error","Unathenticated","Username or Password is wrong")
-    }
-    
-  
-     
-    }
-    catch (error) {
-      console.warn(error);
-      setShow(false);
-        navigation.navigate("notfound");
-     
-   }
-  }else showToast("error","Warn","AllFields Required")
-  // navigation.navigate("home");
- 
-   
+  // axios.post('https://school-management-api.azurewebsites.net/parent/login',{
+  //   username:username,
+  //   password:password
+  // }).then((res)=>
+  // {
+  //   console.log(res);
+  // }).catch((err)=>
+  // {
+  //   console.log(err);
+  // })
+  // axios.get('https://school-management-api.azurewebsites.net/parents/15/getChildren').then((res)=>
+  // {
+  //   console.log(res.data);
+  // }).catch(err=>
+  //   {
+  //     console.log(err);
+  //   })
+
+  // try {
+  //   const response = await axios.post('https://school-management-api.azurewebsites.net/admin/login', {
+  //     // data to be sent in the request body
+  //     username: username,
+  //     password: password,
+  //   });
+  //   console.log(response.data);
+  // } catch (error) {
+  //   console.error(error);
+  // }
+
+  // axios.post('https://school-management-api.azurewebsites.net/parent/login',
+  // {
+  //   username:username,
+  //   password:password
+  // }).then((res)=>
+  // {
+  //   console.log(res.data);
+  // }).catch((err)=>
+  // {
+  //   console.log(err);
+  // })
 }
   const changePassword=()=>
   {
@@ -86,6 +100,7 @@ const Login=({navigation})=>
     <View style={style.main_container}>
       <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
     <View style={style.Logo_container}>
+
      <Image source={logo} style={style.image}/>
     </View>
     <View style={style.Info_container}>
@@ -106,7 +121,7 @@ const Login=({navigation})=>
      />
     </View>
     <View style={style.btn}>
-      <TouchableOpacity style={style.button} onPress={loginHandler}>
+      <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setPassword,setUserName,showToast)}>
         <Text style={style.text}>Log In</Text>
       </TouchableOpacity>
     </View>
@@ -176,7 +191,10 @@ display:"flex",
   
      display:"flex",
      justifyContent:"center",
-     alignItems:"center"
+     alignItems:"center",
+     
+
+
 
     
  },

@@ -1,11 +1,27 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import React,{useState,useCallback} from 'react'
+import axios from 'axios'
 const mentor = require("../../assets/presentation.png")
 
 
 
 
-const Mentor = ({ name, qualification, exp, details }) => {
+const Mentor = ({ name, qualification, exp, details ,mentor_id}) => {
+  const [showScheduleButton,setScheduelButton]=useState(true);
+  const scheduleHandler=()=>
+  {
+     
+      // post request api
+      axios.post("https://school-management-api.azurewebsites.net/parents/11/requestMentor",
+      {
+        mentor_id:mentor_id
+      }).then((res)=>
+      {
+        setScheduelButton(false);
+        console.log(res.data);
+      } )
+      .catch((err)=> console.log(err))
+  }
 
   const [textShown, setTextShown] = useState(false); //To show ur remaining Text
 const [lengthMore,setLengthMore] = useState(false); //to show the "Read more & Less Line"
@@ -74,9 +90,20 @@ const onTextLayout = useCallback(e =>{
 
          
 <View>
-<TouchableOpacity style={styles.button}>
-        <Text style={{color:"white",fontWeight:500}}>SCHEDULE</Text>
-      </TouchableOpacity>
+  {
+    showScheduleButton ? <TouchableOpacity style={styles.button} onPress={scheduleHandler}>
+    <Text style={{color:"white",fontWeight:500}}>SCHEDULE</Text>
+  </TouchableOpacity> : 
+     <Text style={{
+      lineHeight:20,
+      fontWeight:600,
+      backgroundColor:"#5cb85c",
+      padding:10,
+      borderRadius:9,
+      color:"white"
+     }}>SCHEDULED</Text>
+  }
+
 </View>
     
         </View>
@@ -102,6 +129,14 @@ const styles = StyleSheet.create(
      padding:5,
     backgroundColor:"white",
       borderRadius: 9,
+      
+    
+      backgroundColor: 'white',
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
    
    
     
@@ -194,7 +229,7 @@ const styles = StyleSheet.create(
 
     },
      keyText: {
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: 400,
       flex:0.61,
       color:"#000"

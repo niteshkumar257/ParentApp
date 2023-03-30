@@ -10,13 +10,25 @@ import Parentsprofile from './normal/Parentsprofile';
 import Notification from './normal/Notification';
 import Notfound from './normal/Notfound';
 import Student from './normal/Student';
+import Logo from "./normal/Logo";
   
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
+    <NavigationContainer
+    >
+      <Stack.Navigator
+       screenOptions={{
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#318CE7' },
+      }}
+      >
+      <Stack.Screen
+          name="logo"
+          component={Logo}
+          options={{ title: 'Student' ,headerShown:false}}
+        />
         <Stack.Screen
           name="login"
           component={Splash}
@@ -50,7 +62,7 @@ const AppNavigator = () => {
           <Stack.Screen
           name="notfound"
           component={Notfound}
-          options={{title:'Notfound'}}
+          options={{title:'Notfound',headerShown:false}}
           
           />
          <Stack.Screen
@@ -58,6 +70,7 @@ const AppNavigator = () => {
           component={Student}
           options={{ title: 'Student' ,headerShown:false}}
         />
+       
       </Stack.Navigator>
     </NavigationContainer>
   );
