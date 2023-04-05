@@ -20,6 +20,7 @@ const VideoPlayer = ({videoId,setPlayStatus}) => {
         webViewProps={{androidLayerType: 'software'}}
         overScrollMode="never"
         videoId={videoId}
+        fullscreen={true}
        
       />
       

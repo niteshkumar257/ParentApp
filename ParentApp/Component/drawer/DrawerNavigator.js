@@ -11,12 +11,14 @@ const DrawerNavigator = ({child_name,child_id}) => {
   return (
     <Drawer.Navigator
   
-     drawerContent={props => <CustomDrawer {...props} child_name={child_name} />}>
+     drawerContent={props => <CustomDrawer {...props} child_name={child_name} />}
+     
+    >
       <Drawer.Screen
         name={child_name}
         component={Main}
         initialParams={{child_id}}
-        options={{headerShown: false}}
+        options={{headerShown:false}}
       />
      
     </Drawer.Navigator>

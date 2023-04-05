@@ -107,7 +107,7 @@ const ChartC = ({type,color1,color2,subject,data}) => {
        
       },
     labels: { formatter: (v) => v.toFixed(0) } }} />
-  <HorizontalAxis tickCount={12} 
+  <HorizontalAxis tickCount={5} 
   theme={
     {
       axis: {

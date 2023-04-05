@@ -9,6 +9,8 @@ import { AuthContext } from '../Context/Context';
 import Mark from './Mark';
 import DataContext from '../Context/DataContext';
 
+import AcitvityHandler from './AcitvityHandler';
+
 
 const Screen3 = () => {
   const { id } = useContext(DataContext);
@@ -17,6 +19,7 @@ const Screen3 = () => {
   const [testDetails, setTestDetails] = useState([]);
   const [tableTestDetails, setTableTestDetails] = useState([]);
   const [toggleGraphShow,setToggleGraphShow]=useState(false);
+  const [fetchDataStatus,setFetchDataStatus]=useState(false);
 
 
 
@@ -73,6 +76,7 @@ const Screen3 = () => {
         setTestDetails(dataConvert(res.data.allmarksDetail));
         setTableTestDetails(tableDataConverter(res.data.allmarksDetail)); 
         setTestFetchStatus(false);
+        setFetchDataStatus(true);
           
          })
         .catch((err) => {
@@ -88,10 +92,10 @@ const Screen3 = () => {
   
   return (
     <ScrollView overScrollMode="never" removeClippedSubviews={true}>
-     
+        
     
       <View style={styles.container}>
-       {  testFetchStatus &&  <ActivityIndicator  size={25} animating={testFetchStatus} />}
+       {  testFetchStatus ?  <AcitvityHandler show={testFetchStatus}/>:
         <View style={styles.tableContainer}>
 
           {tableTestDetails?.map((item, index) =>
@@ -102,12 +106,13 @@ const Screen3 = () => {
             )
           }
         </View>
+}
 {
-     !toggleGraphShow &&   <TouchableOpacity style={styles.showGraphButton} onPress={graphShowToggleHandler}>
+     !toggleGraphShow && fetchDataStatus &&  <TouchableOpacity style={styles.showGraphButton} onPress={graphShowToggleHandler}>
           <Text style={styles.graphButtonText}>Show graphical analysis</Text>
         </TouchableOpacity>}
 {
-     toggleGraphShow &&    <View style={styles.chartContainer}>
+     toggleGraphShow &&  !testFetchStatus &&   <View style={styles.chartContainer}>
           {
             testDetails?.map((item, index) =>
             (
@@ -130,7 +135,8 @@ const styles = StyleSheet.create(
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "white"
+      backgroundColor: "white",
+      paddingBottom:30
 
     },
     tableContainer: {
@@ -167,12 +173,13 @@ const styles = StyleSheet.create(
       color: "black"
     },
     showGraphButton:{
-        width:'90%',
+        width:'95%',
         backgroundColor:"green",
         height:40,
         flex:1,
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        borderRadius:9
     },
     graphButtonText:{
       fontSize:15,

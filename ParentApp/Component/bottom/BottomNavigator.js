@@ -84,7 +84,8 @@ const BottomNavigator = ({id}) => {
     <Tab.Screen name="Fees" component={Screen2} />
     <Tab.Screen name="Peformance" component={Screen3} />
     <Tab.Screen name="Mentor" component={Screen4} options={{
-      headerTintColor: 'red',
+      headerTintColor: 'black',
+   
     
     }} />
     <Tab.Screen name="Subjects" component={VideoStackNavigator} options={{

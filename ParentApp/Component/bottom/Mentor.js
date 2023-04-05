@@ -1,23 +1,33 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
-import React,{useState,useCallback} from 'react'
+import React,{useState,useCallback,useContext,useEffect} from 'react'
 import axios from 'axios'
 const mentor = require("../../assets/presentation.png")
+import { AuthContext } from '../Context/Context';
+import jwtDecode from 'jwt-decode';
 
 
 
 
-const Mentor = ({ name, qualification, exp, details ,mentor_id}) => {
-  const [showScheduleButton,setScheduelButton]=useState(true);
+const Mentor = ({ name, qualification, exp, details ,mentor_id,mentorScheduleStatus,getScheduleDetails,check}) => {
+ console.log("Mentor name",name);
+  const [showScheduleButton,setScheduelButton]=useState(false);
+  const [scheduleRequest,setscheduleRequest]=useState(false);
+  
+  const {userToken}=useContext(AuthContext);
+ let userInfo=jwtDecode(userToken);
+ let parentId=(userInfo.result.parent_id);
   const scheduleHandler=()=>
   {
      
       // post request api
-      axios.post("https://school-management-api.azurewebsites.net/parents/11/requestMentor",
+      setscheduleRequest(true);
+      axios.post(`https://school-management-api.azurewebsites.net/parents/${parentId}/requestMentor`,
       {
         mentor_id:mentor_id
       }).then((res)=>
       {
-        setScheduelButton(false);
+        setScheduelButton(true);
+        getScheduleDetails();
         console.log(res.data);
       } )
       .catch((err)=> console.log(err))
@@ -33,6 +43,11 @@ const onTextLayout = useCallback(e =>{
     setLengthMore(e.nativeEvent.lines.length >=1); //to check the text is more than 4 lines or not
     // console.log(e.nativeEvent);
 },[]);
+
+
+
+
+
   return (
     <View style={styles.main_container}>
       <View style={styles.container}>
@@ -90,23 +105,29 @@ const onTextLayout = useCallback(e =>{
 
          
 <View>
-  {
-    showScheduleButton ? <TouchableOpacity style={styles.button} onPress={scheduleHandler}>
-    <Text style={{color:"white",fontWeight:500}}>SCHEDULE</Text>
-  </TouchableOpacity> : 
-     <Text style={{
-      lineHeight:20,
-      fontWeight:600,
-      backgroundColor:"#5cb85c",
-      padding:10,
-      borderRadius:9,
-      color:"white"
-     }}>SCHEDULED</Text>
+  { 
+   <TouchableOpacity style={!showScheduleButton?styles.buttonActive:styles.buttonInacitve} disabled={mentorScheduleStatus}  onPress={scheduleHandler}>
+     { showScheduleButton | check ? <Text style={{
+      color:"white",
+      lineHeight:15,
+      backgroundColor:"green"
+
+     }}>Pending</Text>:<Text
+     style={{
+      color:"white",
+      lineHeight:15,
+    
+     }}
+     >Schedule</Text>}
+  </TouchableOpacity> 
   }
 
 </View>
+
     
         </View>
+       
+     
       </View>
     
 
@@ -267,7 +288,7 @@ const styles = StyleSheet.create(
       padding: 5,
      
     },
-    button:{
+    buttonActive:{
       height:30,
       width:100,
       flex:1,
@@ -279,7 +300,21 @@ const styles = StyleSheet.create(
     borderRadius:9
     
 
+    },
+    buttonInacitve:{
+      height:30,
+      width:100,
+      flex:1,
+      fontSize:15,
+      justifyContent:"center",
+      alignItems:"center",
+    backgroundColor:"green",
+    color:"white",
+    borderRadius:9
+    
+
     }
+
    
   }
 )
