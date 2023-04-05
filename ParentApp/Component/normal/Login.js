@@ -142,10 +142,12 @@ const style=StyleSheet.create({
       width:"100%",
       // backgroundColor:"lightgreen",
       display:"flex",
-      justifyContent:"center",
+      // justifyContent:"center",
       alignItems:"center",
       backgroundColor:"white",
-      rowGap:20
+      rowGap:15,
+      paddingTop:80
+   
 
 
   },
@@ -156,7 +158,8 @@ const style=StyleSheet.create({
 
   display:"flex",
   alignItems:"center",
-  justifyContent:"center"
+  justifyContent:"center",
+ 
   
 
   
@@ -183,11 +186,11 @@ display:"flex",
 
  },
  btn:{
-     height:60,
-     width:"80%",
+     height:70,
+     width:"85%",
      borderRadius:9,
      fontSize:20,
-     padding:10,
+     padding:5,
   
      display:"flex",
      justifyContent:"center",
@@ -209,18 +212,26 @@ display:"flex",
   padding: 10,
   display:"flex",
   justifyContent:"center",
-  alignItems:"center"
+  alignItems:"center",
+  
   
 
  },
 button:{
   height:50,
-  width:"100%",
+  width:100,
   backgroundColor:"#1377c0",
   borderRadius:9,
   display:"flex",
   alignItems:"center",
   justifyContent:"center",
+  elevation: 10,
+  shadowColor: '#000',
+  width:"100%",
+  padding:10,
+  shadowOffset: {width: 0, height: 0},
+  shadowOpacity: 0.1,
+  shadowRadius: 5,
   
   
  

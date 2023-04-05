@@ -3,6 +3,7 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 import VideoList from './VideoList'
 import { create } from 'react-test-renderer'
+import AcitvityHandler from './AcitvityHandler'
 
 const Biology = ({navigation,route}) => {
     console.log("route",route);
@@ -53,7 +54,8 @@ const Biology = ({navigation,route}) => {
     <ScrollView overScrollMode='never'>
         <View style={styles.videoContainer}>
         {
-          !showActivity && videoList?.map((item) =>
+          showActivity ? <AcitvityHandler show={showActivity}/>
+          : videoList?.map((item) =>
           (
             <VideoList key={item.id} title={item.snippet.title} image={item.snippet.thumbnails.medium.url} height={item.snippet.thumbnails.medium.height}
               width={item.snippet.thumbnails.medium.width} videoId={item.snippet.resourceId.videoId}

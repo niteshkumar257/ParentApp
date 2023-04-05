@@ -18,7 +18,7 @@ const Fee = ({nthInstallMent,status,amount,date,totalFees}) => {
                   fontWeight:600,
                   color:"black"
               }}>{amount}</Text>
-              <Text style={[status==="Paid"?styles.paidText:styles.unpaidText]} >{status==="Paid"?"Paid":"UnPaid"}</Text>
+              <Text style={[status==="Paid"?styles.paidText:styles.unpaidText]} >{status==="Paid"?"Paid":"Un_Paid"}</Text>
               
             </View>
            
@@ -83,17 +83,17 @@ const styles=StyleSheet.create(
 
     },
     paid:{
-     backgroundColor:"#5cb85c",
+     backgroundColor:"#A5DE8A",
       // backgroundColor:"green"
     
     },
     unpaid:{
-      backgroundColor:"#ff3333"
+      backgroundColor:"#FF9999"
     },
     text:{
       fontSize:20,
       fontWeight:600,
-      color:"white"
+      color:"black"
       
 
     },
